@@ -1,10 +1,8 @@
 # PHP : Démarrage et syntaxe
 
-**[PHP](http://php.net/manual/fr/intro-whatis.php)** est un acronyme récursif signifiant ̀ PHP Hypertext Preprocessor`. En français Préprocesseur Hypertext.
-C'est un langage de script open source conçu spécialement conçu pour le développement d'applications web et exécuté côté serveur.
-La dernière version majeure est la 7.1 mais vous trouverez encore beaucoup de site en version 5.6.
+**[PHP](http://php.net/manual/fr/intro-whatis.php)** est un acronyme récursif signifiant ̀ PHP Hypertext Preprocessor`.
 
-Exemple :
+Hello World :
 ```
 <!DOCTYPE HTML>
 <html>
@@ -21,19 +19,110 @@ Exemple :
 </html>
 ```
 
-L'avantage de PHP est de permettre d'inclure directement son code dans les fichiers HTML avec les balises encadrantes spécifiques `<?php` au début et `?>` pour fermer le code PHP.
-Cette syntaxe permet au serveur Web de passer en mode PHP sur ces fragments.
-
-Tout en restant simple pour les débutants, PHP offre des fonctionnalités avancées pour les experts. Dans ce cours nous utiliserons des exemples simples pour apprendre les éléments du langage et son intégration dans le HTML.
-
-
+Le code PHP est contenu entre une balise d'ouverture `<?php` ou `<?` et une balise fermante optionnelle `?>`.
 
 ## Ressources
 
-Il existe beaucoup de documentation sur internet pour vous aider à développer en PHP. Je vous donne ici quelques sites de références
-* [php.net](http://php.net/manual/fr/) : le site officiel de PHP, je vous conseille très fortement le moteur de recherche interne.
-* [W3Schools](https://www.w3schools.com/php/default.asp) : vous connaissez déjà ce site pour ses ressources sur HTML et Javascript, il y a également tout un pan sur PHP, en version 5 pour l'instant.
-* [OpenClassrooms](https://openclassrooms.com/) : anciennement connu sous le nom `le site du zéro` vous trouverez sur ce site francophone des formations dédiées pour aller plus loin.
-* [StackOverflow](https://stackoverflow.com/questions/tagged/php) : site international de questions/réponses qui vous permettra de voir comment d'autres avant vous ont résolu un problème
+* [php.net](http://php.net/manual/fr/)
+* [W3Schools](https://www.w3schools.com/php/default.asp)
+* [OpenClassrooms](https://openclassrooms.com/)
+* [GrafikArt](https://www.grafikart.fr/)
+* [StackOverflow](https://stackoverflow.com/questions/tagged/php)
 
-##
+## Les types de données
+
+* [`boolean`](http://php.net/manual/fr/language.types.boolean.php)
+* [`integer`](http://php.net/manual/fr/language.types.integer.php)
+* [`float`](http://php.net/manual/fr/language.types.float.php)
+* [`string`](http://php.net/manual/fr/language.types.string.php)
+* [`array`](http://php.net/manual/fr/language.types.array.php)
+* [`object`](http://php.net/manual/fr/language.types.object.php)
+* [`resource`](http://php.net/manual/fr/language.types.resource.php)
+* [`null`](http://php.net/manual/fr/language.types.null.php)
+
+## Les variables
+
+Les variables PHP commencent toujours par le symbole `$` exemple `$myar`.
+
+Règles de nommage :
+ * Commencer par une lettre ou un underscore `_`
+ * Contenir un ensemble de lettres, de chiffres et du `_`
+ * Ne pas être `$this` qui est une variable réservée de PHP
+
+exemple
+```
+$a = 'Hello World !';
+$b = $a; // $b vaut alors 'Hello World !', comme $a
+
+$c = 21;
+$d = $c * 2; // $d vaut alors 42
+
+echo $a; // Affichera: Hello World !
+
+echo 'Hello !'; // Affichera directement: Hello !
+```
+
+## Les instructions
+
+Une instruction représente une action à effectuer par PHP. Chaque instruction se termine par `;`. les blocs de code sont encadrés par des accolades `{ }`.
+
+exemple
+```
+if (!isset($a)) {
+    $a = 4;
+    echo $a;
+    /*
+        ici, à l'exception de la condition, nous avons 2 instructions, terminées par un point-virgule.
+        la première affecte une valeur à une variable, la seconde affiche cette variable
+    */
+}
+```
+
+## La concaténation
+
+l'opérateur de concaténation est le `.` il permet de mettre bout à bout deux chaînes de caractères.
+
+exemple
+```
+/* Opérateur de concaténation */
+$a = 'Hello ';
+$b = $a . 'World !'; // $a ne change pas mais $b vaut désormais "Hello World !"
+
+/* Opérateur d'affectation concaténant */
+$c = 'Hello ';
+$c .= 'World !'; // On concatène cette chaîne à la précédente, $c vaut désormais "Hello World !"
+
+/* Il est tout à fait possible de combiner les deux */
+$d = 'Hello ';
+$e = 'World ';
+$d .= $e . '!'; // $e ne change pas, mais $d vaut désormais "Hello World !"
+```
+
+## Les conditions
+
+structure
+```
+if (<condition>) {                   // Si
+  <bloc d'instructions du if>
+} elseif (<autre condition>) {        // Sinon si
+  <bloc d'instructions du elsif>
+} elseif (<autre autre condition>) {  // Sinon si
+  <bloc d'instructions du elsif>
+} else {                             // Sinon
+  <bloc d'instrucions du else>
+}
+```
+* Les `elseif` et le `else` sont optionnels
+* Autant de `elseif` que l'on veut
+* le `else` toujours en dernier
+
+Exemple
+```
+if ($soleil == "levé" && $heure == 6) {
+  echo "C'est l'été et il fait jour !";
+} elsif ($soleil != "levé" && $heure == 8) {
+  echo "C'est l'hiver et le soleil n'est pas encore levé";
+} else {
+  echo "Quelle heure est-il ?";
+}
+```
