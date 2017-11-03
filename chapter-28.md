@@ -141,7 +141,7 @@ Une branche permet de travailer de manière isolé du reste du projet.
 
 `git branch <branche>` pour la création d'une branche puis `git checkout <banche>` pour s'y déplacer ou en une seule opération `git checkout -b <branche>`.
 
-Une fois le code de la branche valider
+Une fois le code de la branche validé
 * `git rebase` pour repositionner la branche en haut de la branche de destination et résoudre les conflits
 * `git merge` pour fusionner la branche de la fonctionnalité dans la branche principale
 
