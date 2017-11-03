@@ -126,3 +126,30 @@ if ($soleil == "levé" && $heure == 6) {
   echo "Quelle heure est-il ?";
 }
 ```
+
+
+## La comparaison
+
+Il existe 11 opérateurs de comparaison :
+* `$a == $b` $a vaut $b
+* `$a === $b` $a vaut $b ET ils sont de même type
+* `$a != $b` ou `$a <> $b` $a est différent de $b
+* `$a !== $b` $a différent de $b OU ils sont de type différent
+* `$a < $b` $a strictement inférieur à $b
+* `$a > $b` $a strictement supérieur à $b
+* `$a <= $b` $a inférieur ou égal à $b
+* `$a >= $b` $a supérieur ou égal à $b
+* `!$a` non $a (si $a est vrai alors false, si $a est faux alors vrai)
+
+A partie de php7 2 nouveaux opéateurs de comparaison :
+* $a <=> $b -1 si $a inférieur à $b, 0 si $a vaut $b et +1 si $a supérieur à $b
+* $a ?? $b ?? $c renvoie la première opérande non nouvelle
+
+## Arithmétique
+
+Les opération simples d'arithmétiques sont :
+* $a + $b : Addition
+* $a - $b : Soustraction
+* $a * $b : Multiplication
+* $a / $b : Division
+* $a % $b : Modulo (reste de la division de $a par $b)
