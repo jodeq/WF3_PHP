@@ -27,6 +27,14 @@ $bulbizarre = [
 ];
 $pokemons['Bulbizarre'] = $bulbizarre;
 
+// Salameche
+$salameche = [
+  'pv' => isset($_GET['pv_pokemon2']) ? $_GET['pv_pokemon2'] : 30,
+  'attaque' => isset($_GET['attaque_pokemon2']) ? $_GET['attaque_pokemon2'] : 8,
+  'defense' => isset($_GET['defense_pokemon2']) ? $_GET['defense_pokemon2'] : 20
+];
+$pokemons['Salameche'] = $salameche;
+
 // tableau de validation
 $form_error = [];
 
@@ -65,7 +73,7 @@ foreach($_GET as $input => $value) {
         <select name="pokemon2" <?php echo isset($form_error['pokemon2']) ? 'class="error"' : ''; ?>>
           <?php
             foreach($pokemons as $pokemon => $stats) {
-              echo '<option value="' . $pokemon . '">' . $pokemon . '</option>';
+              echo '<option value="' . $pokemon . '" ' . ($pokemon == 'Bulbizarre' ? 'selected' : '') . '>' . $pokemon . '</option>';
             }
           ?>
         </select>
