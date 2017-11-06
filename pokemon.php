@@ -1,3 +1,9 @@
+<html>
+<head>
+  <!-- Insérer le css ici -->
+</head>
+<body>
+
 <?php
 /**
  * Bienvenue dans ce module PHP
@@ -19,13 +25,13 @@ $bulbizarre = [
 ];
 
 $tour = 0;
-
+echo "Date : " . date('d/m/Y : H:i:s');
 // Boucle de combat
 do {
-  echo "<h2> Tour : " . ++$tour . "</h2>";
+  echo "<h2> Tour : " . ++$tour . " à " . date('H:i:s') . "</h2>";
 
   // pikachu attaque bulbizarre
-  echo "<p>Pikachu attaque bulbizarre</p>";
+  echo "<p class=\"titre\">Pikachu attaque bulbizarre</p>";
   if ($pikachu['attaque'] >= $bulbizarre['defense']) {
     // L'attaque est supérieure à la défense : pikachu touche
     $coup = $pikachu['attaque'] - $bulbizarre['defense'] + 1; // La valeur du coup est la différence entre l'attaque et la défense
@@ -66,6 +72,8 @@ do {
     echo "<p>Bulbizarre est KO !</p>";
   if ($pikachu['pv'] <= 0)
     echo "<p>Pikachu est KO !</p>";
+
+  sleep(0.25);
 } while ($pikachu['pv'] > 0 && $bulbizarre['pv'] > 0); // === !($pikachu['pv'] <= 0 || $bulbizarre['pv'] <= 0)
 
 
@@ -76,4 +84,9 @@ $pv_baie_noire = 30;
 
 // Bulbizarre mange une baie rouge
 // Pikachu mange une baie noire
+
 ?>
+
+
+</body>
+</html>
