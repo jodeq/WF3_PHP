@@ -9,52 +9,64 @@ $attaque_pikachu = 15;
 $defense_pikachu = 10;
 $pv_pikachu = 25;
 
+$pikachu = [
+  'pv' => 25,
+  'attaque' => 15,
+  'defense' => 10
+];
+
 // Bulbizarre
 $attaque_bulbizarre = 8;
 $defense_bulbizarre = 20;
 $pv_bulbizarre = 30;
 
+$bulbizare = [
+  'pv' => 30,
+  'attaque' => 8,
+  'defense' => 20
+];
+
 // pikachu attaque bulbizarre
 echo "<p>Pikachu attaque bulbizarre</p>";
-if ($attaque_pikachu >= $defense_bulbizarre) {
+if ($pikachu['attaque'] >= $bulbizare['defense']) {
   // L'attaque est supérieure à la défense : pikachu touche
-  $coup = $attaque_pikachu - $defense_bulbizarre + 1; // La valeur du coup est la différence entre l'attaque et la défense
-  $pv_bulbizarre -= $coup;
-  echo "<p>Bulbizarre perd $coup PV, il lui reste $pv_bulbizarre PV</p>";
+  $coup = $pikachu['attaque'] - $bulbizare['defense'] + 1; // La valeur du coup est la différence entre l'attaque et la défense
+  $bulbizare['pv'] -= $coup;
+  echo "<p>Bulbizarre perd $coup PV, il lui reste " . $bulbizare['pv'] . " PV</p>";
 } else {
   // La défense est supérieure à l'attaque, pikachu prend la moitié du coup et la défense baisse un peu
-  $coup = ($defense_bulbizarre - $attaque_pikachu) / 2;
-  $pv_pikachu -= $coup;
-  $defense_bulbizarre -= 1;
-  echo "<p>Bulbizarre perd 1 Points de défense, il lui reste $defense_bulbizarre Points de défense</p>";
-  echo "<p>Pikachu râte son attaque ! Il perd $coup Points de vie, il lui reste $pv_pikachu Points de vie</p>";
+  $coup = ($bulbizare['defense'] - $pikachu['attaque']) / 2;
+  $pikachu['pv'] -= $coup;
+  $bulbizare['defense'] -= 1;
+  echo "<p>Bulbizarre perd 1 Points de défense, il lui reste " . $bulbizare['defense'] . " Points de défense</p>";
+  echo "<p>Pikachu râte son attaque ! Il perd $coup Points de vie, il lui reste " . $pikachu['pv'] . " Points de vie</p>";
 }
 
-if ($pv_bulbizarre <= 0) // S'il n'y a pas d'accolades après un if, seule la première instruction est filtrée par le if
+if ($bulbizare['pv'] <= 0) // S'il n'y a pas d'accolades après un if, seule la première instruction est filtrée par le if
   echo "<p>Bulbizarre est KO !</p>";
-if ($pv_pikachu <= 0)
+if ($pikachu['pv'] <= 0)
   echo "<p>Pikachu est KO !</p>";
 
 // Et maintenant la contre-attaque : à vous de jouer !
 // bulbizarre attaque pikachu
 echo "<p>Bulbizarre attaque Pikachu</p>";
-if ($attaque_bulbizarre >= $defense_pikachu) {
+if ($bulbizare['attaque'] >= $pikachu['defense']) {
   // L'attaque est supérieure à la défense : bulbizarre touche
-  $coup = $attaque_bulbizarre - $defense_pikachu + 1; // La valeur du coup est la différence entre l'attaque et la défense
-  $pv_pikachu -= $coup;
-  echo "<p>Pikachu perd $coup PV, il lui reste $pv_pikachu PV</p>";
+  $coup = $bulbizare['attaque'] - $pikachu['defense'] + 1; // La valeur du coup est la différence entre l'attaque et la défense
+  $pikachu['pv'] -= $coup;
+  echo "<p>Pikachu perd $coup PV, il lui reste " . $pikachu['pv'] . " PV</p>";
 } else {
   // La défense est supérieure à l'attaque, bulbizarre prend la moitié du coup et la défense baisse un peu
-  $coup = ($defense_pikachu - $attaque_bulbizarre) / 2;
-  $pv_bulbizarre -= $coup;
-  $defense_pikachu -= 1;
-  echo "<p>Pikachu perd 1 Points de défense, il lui reste $defense_pikachu Points de défense</p>";
-  echo "<p>Bulbizarre râte son attaque ! Il perd $coup Points de vie, il lui reste $pv_bulbizarre Points de vie</p>";
+  $coup = ($pikachu['defense'] - $bulbizare['attaque']) / 2;
+  $bulbizare['pv'] -= $coup;
+  $pikachu['defense'] -= 1;
+  echo "<p>Pikachu perd 1 Points de défense, il lui reste " . $pikachu['defense'] . " Points de défense</p>";
+  echo "<p>Bulbizarre râte son attaque ! Il perd $coup Points de vie, il lui reste " . $bulbizare['pv'] . " Points de vie</p>";
 }
 
-if ($pv_bulbizarre <= 0) // S'il n'y a pas d'accolades après un if, seule la première instruction est filtrée par le if
+if ($bulbizare['pv'] <= 0) // S'il n'y a pas d'accolades après un if, seule la première instruction est filtrée par le if
   echo "<p>Bulbizarre est KO !</p>";
-if ($pv_pikachu <= 0)
+if ($pikachu['pv'] <= 0)
   echo "<p>Pikachu est KO !</p>";
 
 // Ajoutons quelques baies pour restaurer des Points de Vies
