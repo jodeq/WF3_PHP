@@ -10,9 +10,11 @@
 $form_error = [];
 
 // Validation du formulaire
-if (empty($_GET['pv_pikachu']) || !ctype_digit($_GET['pv_pikachu']) || $_GET['pv_pikachu'] <= 0) {
-  echo '<p style="">Le champ Points de vie de Pikachu doit un entier strictement supérieur à 0</p>';
-  $form_error['pv_pikachu'] = 1;
+foreach($_GET as $input => $value) {
+  if (empty($value) || !ctype_digit($value) || $value <= 0) {
+    echo '<p style="">Le champ ' . $input . ' doit un entier strictement supérieur à 0</p>';
+    $form_error[$input] = 1;
+  }
 }
 
 // Pikachu
@@ -34,14 +36,14 @@ $bulbizarre = [
     <fieldset>
       <legend>Pikachu</legend>
       <div>Points de vie : <input type="test" name="pv_pikachu" value="<?php echo $pikachu['pv']; ?>" <?php echo isset($form_error['pv_pikachu']) ? 'class="error"' : ''; ?> /></div>
-      <div>Points de défense : <input type="test" name="defense_pikachu" value="<?php echo $pikachu['defense']; ?>"/></div>
-      <div>Points d'attaque : <input type="test" name="attaque_pikachu" value="<?php echo $pikachu['attaque']; ?>"/></div>
+      <div>Points de défense : <input type="test" name="defense_pikachu" value="<?php echo $pikachu['defense']; ?>" <?php echo isset($form_error['defense_pikachu']) ? 'class="error"' : ''; ?> /></div>
+      <div>Points d'attaque : <input type="test" name="attaque_pikachu" value="<?php echo $pikachu['attaque']; ?>" <?php echo isset($form_error['attaque_pikachu']) ? 'class="error"' : ''; ?> /></div>
     </fieldset>
     <fieldset>
       <legend>Bulbizarre</legend>
-      <div>Points de vie : <input type="test" name="pv_bulbizarre" value="<?php echo $bulbizarre['pv']; ?>"/></div>
-      <div>Points de défense : <input type="test" name="defense_bulbizarre" value="<?php echo $bulbizarre['defense']; ?>"/></div>
-      <div>Points d'attaque : <input type="test" name="attaque_bulbizarre" value="<?php echo $bulbizarre['attaque']; ?>"/></div>
+      <div>Points de vie : <input type="test" name="pv_bulbizarre" value="<?php echo $bulbizarre['pv']; ?>" <?php echo isset($form_error['pv_bulbizarre']) ? 'class="error"' : ''; ?> /></div>
+      <div>Points de défense : <input type="test" name="defense_bulbizarre" value="<?php echo $bulbizarre['defense']; ?>" <?php echo isset($form_error['defense_bulbizarre']) ? 'class="error"' : ''; ?> /></div>
+      <div>Points d'attaque : <input type="test" name="attaque_bulbizarre" value="<?php echo $bulbizarre['attaque']; ?>" <?php echo isset($form_error['attaque_bulbizarre']) ? 'class="error"' : ''; ?> /></div>
     </fieldset>
     <button type="submit">Combattez !</button>
   </form>
