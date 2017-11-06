@@ -1,10 +1,20 @@
 <html>
 <head>
   <!-- Insérer le css ici -->
+  <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 
 <?php
+// tableau de validation
+$form_error = [];
+
+// Validation du formulaire
+if (empty($_GET['pv_pikachu']) || !ctype_digit($_GET['pv_pikachu']) || $_GET['pv_pikachu'] <= 0) {
+  echo '<p style="">Le champ Points de vie de Pikachu doit un entier strictement supérieur à 0</p>';
+  $form_error['pv_pikachu'] = 1;
+}
+
 // Pikachu
 $pikachu = [
   'pv' => isset($_GET['pv_pikachu']) ? $_GET['pv_pikachu'] : 25, // 25 Points de vie par défaut
@@ -23,7 +33,7 @@ $bulbizarre = [
   <form>
     <fieldset>
       <legend>Pikachu</legend>
-      <div>Points de vie : <input type="test" name="pv_pikachu" value="<?php echo $pikachu['pv']; ?>"/></div>
+      <div>Points de vie : <input type="test" name="pv_pikachu" value="<?php echo $pikachu['pv']; ?>" <?php echo isset($form_error['pv_pikachu']) ? 'class="error"' : ''; ?> /></div>
       <div>Points de défense : <input type="test" name="defense_pikachu" value="<?php echo $pikachu['defense']; ?>"/></div>
       <div>Points d'attaque : <input type="test" name="attaque_pikachu" value="<?php echo $pikachu['attaque']; ?>"/></div>
     </fieldset>
@@ -47,7 +57,8 @@ $bulbizarre = [
 var_dump($_GET);
 var_dump($_POST);
 echo "</pre>";*/
-
+if (count($form_error) > 0)
+  die ("Le combat est reporté pour cause d'erreurs de saisie");
 
 
 $tour = 0;
@@ -101,7 +112,6 @@ do {
   if ($pikachu['pv'] <= 0)
     echo "<p>Pikachu est KO !</p>";
 
-  sleep(0.25);
 } while ($pikachu['pv'] > 0 && $bulbizarre['pv'] > 0); // === !($pikachu['pv'] <= 0 || $bulbizarre['pv'] <= 0)
 
 
