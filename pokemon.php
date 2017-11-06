@@ -29,7 +29,7 @@ $bulbizarre = [
     </fieldset>
     <fieldset>
       <legend>Bulbizarre</legend>
-      <div>Points de vie : <input type="test" name="pv_bulbizarre" value="<?php echo $bulbizarre['pv']); ?>"/></div>
+      <div>Points de vie : <input type="test" name="pv_bulbizarre" value="<?php echo $bulbizarre['pv']; ?>"/></div>
       <div>Points de défense : <input type="test" name="defense_bulbizarre" value="<?php echo $bulbizarre['defense']; ?>"/></div>
       <div>Points d'attaque : <input type="test" name="attaque_bulbizarre" value="<?php echo $bulbizarre['attaque']; ?>"/></div>
     </fieldset>
