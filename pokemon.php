@@ -6,16 +6,10 @@
 <body>
 
 <?php
-// tableau de validation
-$form_error = [];
+// Initialisation des variables
 
-// Validation du formulaire
-foreach($_GET as $input => $value) {
-  if (empty($value) || !ctype_digit($value) || $value <= 0) {
-    echo '<p style="">Le champ ' . $input . ' doit un entier strictement supérieur à 0</p>';
-    $form_error[$input] = 1;
-  }
-}
+// Mes pokemons
+$pokemons = array();
 
 // Pikachu
 $pikachu = [
@@ -23,6 +17,7 @@ $pikachu = [
   'attaque' => isset($_GET['attaque_pikachu']) ? $_GET['attaque_pikachu'] : 15,
   'defense' => isset($_GET['defense_pikachu']) ? $_GET['defense_pikachu'] : 10
 ];
+$pokemons['Pikachu'] = $pikachu;
 
 // Bulbizarre
 $bulbizarre = [
@@ -30,17 +25,54 @@ $bulbizarre = [
   'attaque' => isset($_GET['attaque_bulbizarre']) ? $_GET['attaque_bulbizarre'] : 8,
   'defense' => isset($_GET['defense_bulbizarre']) ? $_GET['defense_bulbizarre'] : 20
 ];
+$pokemons['Bulbizarre'] = $bulbizarre;
+
+// tableau de validation
+$form_error = [];
+
+// Validation du formulaire
+foreach($_GET as $input => $value) {
+  if ($input === 'pokemon1' || $input === 'pokemon2') {
+    if (!isset($pokemons[$value])) {
+      echo '<p style="">Le pokemon ' . $value . ' n\'est pas un pokemon disponible</p>';
+      $form_error[$input] = 1;
+    }
+  } elseif (empty($value) || !ctype_digit($value) || $value <= 0) {
+    echo '<p style="">Le champ ' . $input . ' doit un entier strictement supérieur à 0</p>';
+    $form_error[$input] = 1;
+  }
+}
+
+echo"<pre>";
+var_dump($pokemons);
+echo"</pre>";
 ?>
 
   <form>
     <fieldset>
-      <legend>Pikachu</legend>
+      <legend>Pokemon 1 :
+        <select name="pokemon1" <?php echo isset($form_error['pokemon1']) ? 'class="error"' : ''; ?>>
+          <?php
+            foreach($pokemons as $pokemon => $stats) {
+              echo '<option value="' . $pokemon . '">' . $pokemon . '</option>';
+            }
+          ?>
+        </select>
+      </legend>
       <div>Points de vie : <input type="test" name="pv_pikachu" value="<?php echo $pikachu['pv']; ?>" <?php echo isset($form_error['pv_pikachu']) ? 'class="error"' : ''; ?> /></div>
       <div>Points de défense : <input type="test" name="defense_pikachu" value="<?php echo $pikachu['defense']; ?>" <?php echo isset($form_error['defense_pikachu']) ? 'class="error"' : ''; ?> /></div>
       <div>Points d'attaque : <input type="test" name="attaque_pikachu" value="<?php echo $pikachu['attaque']; ?>" <?php echo isset($form_error['attaque_pikachu']) ? 'class="error"' : ''; ?> /></div>
     </fieldset>
     <fieldset>
-      <legend>Bulbizarre</legend>
+      <legend>Pokemon 2 :
+        <select name="pokemon2" <?php echo isset($form_error['pokemon2']) ? 'class="error"' : ''; ?>>
+          <?php
+            foreach($pokemons as $pokemon => $stats) {
+              echo '<option value="' . $pokemon . '">' . $pokemon . '</option>';
+            }
+          ?>
+        </select>
+      </legend>
       <div>Points de vie : <input type="test" name="pv_bulbizarre" value="<?php echo $bulbizarre['pv']; ?>" <?php echo isset($form_error['pv_bulbizarre']) ? 'class="error"' : ''; ?> /></div>
       <div>Points de défense : <input type="test" name="defense_bulbizarre" value="<?php echo $bulbizarre['defense']; ?>" <?php echo isset($form_error['defense_bulbizarre']) ? 'class="error"' : ''; ?> /></div>
       <div>Points d'attaque : <input type="test" name="attaque_bulbizarre" value="<?php echo $bulbizarre['attaque']; ?>" <?php echo isset($form_error['attaque_bulbizarre']) ? 'class="error"' : ''; ?> /></div>
