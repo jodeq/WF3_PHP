@@ -53,10 +53,6 @@ foreach($_GET as $input => $value) {
 }
 
 // Vérifions les informations
-/*echo "<pre>";
-var_dump($_GET);
-var_dump($_POST);
-echo "</pre>";*/
 if (count($form_error) > 0)
   die ("Le combat est reporté pour cause d'erreurs de saisie");
 
@@ -64,8 +60,6 @@ if (count($_GET) == 0) {
   echo "<h2>Veuillez sélectionner vos pokemons et lancez le combat</h2>";
   return;
 }
-
-$tour = 0;
 
 $nom_pokemon1 = $_GET['pokemon1'];
 $pokemon1 = $pokemons[$nom_pokemon1];
@@ -87,20 +81,17 @@ echo "<h2>$nom_pokemon1 affronte $nom_pokemon2</h2>";
 
 // Boucle de combat
 do {
-  echo "<h2> Tour : " . ++$tour . " à " . date('H:i:s') . "</h2>";
-
   // attaque
   attaque($nom_pokemon1, $pokemon1, $nom_pokemon2, $pokemon2);
 
-  if ($pokemon2['pv'] <= 0)
+  // Si l'un des deux pokemon est KO alors sortie de la boucle via l'instruction break
+  if ($pokemon1['pv'] <= 0 || $pokemon2['pv'] <= 0)
     break;
 
   // contre attaque
   attaque($nom_pokemon2, $pokemon2, $nom_pokemon1, $pokemon1);
 
 } while ($pokemon1['pv'] > 0 && $pokemon2['pv'] > 0); // === !($pikachu['pv'] <= 0 || $bulbizarre['pv'] <= 0)
-
-
 
 // Ajoutons quelques baies pour restaurer des Points de Vies
 $pv_baie_rouge = 50;

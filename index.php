@@ -15,31 +15,33 @@
   <form>
     <fieldset>
       <legend>Pokemon 1 :
-        <select id="pokemon1" name="pokemon1" <?php echo isset($form_error['pokemon1']) ? 'class="error"' : ''; ?>>
+        <select name="pokemon1" <?php echo isset($form_error['pokemon1']) ? 'class="error"' : ''; ?>>
+          <option value="">- Aucun -</option>
           <?php
             foreach($pokemons as $pokemon => $stats) {
-              echo '<option value="' . $pokemon . '">' . $pokemon . '</option>';
+              echo '<option value="' . $pokemon . '" ' . (isset($nom_pokemon1) && $pokemon == $nom_pokemon1 ? 'selected' : '') . '>' . $pokemon . '</option>';
             }
           ?>
         </select>
       </legend>
-      <div>Points de vie : <input type="test" name="pv_pokemon1" value="<?php echo $pikachu['pv']; ?>" <?php echo isset($form_error['pv_pokemon1']) ? 'class="error"' : ''; ?> /></div>
-      <div>Points de défense : <input type="test" name="defense_pokemon1" value="<?php echo $pikachu['defense']; ?>" <?php echo isset($form_error['defense_pokemon1']) ? 'class="error"' : ''; ?> /></div>
-      <div>Points d'attaque : <input type="test" name="attaque_pokemon1" value="<?php echo $pikachu['attaque']; ?>" <?php echo isset($form_error['attaque_pokemon1']) ? 'class="error"' : ''; ?> /></div>
+      <div>Points de vie : <input type="test" name="pv_pokemon1" value="<?php echo isset($pokemon1) ? $pokemon1['pv'] : ''; ?>" <?php echo isset($form_error['pv_pokemon1']) ? 'class="error"' : ''; ?> /></div>
+      <div>Points de défense : <input type="test" name="defense_pokemon1" value="<?php echo isset($pokemon1) ? $pokemon1['defense'] : ''; ?>" <?php echo isset($form_error['defense_pokemon1']) ? 'class="error"' : ''; ?> /></div>
+      <div>Points d'attaque : <input type="test" name="attaque_pokemon1" value="<?php echo isset($pokemon1) ? $pokemon1['attaque'] : ''; ?>" <?php echo isset($form_error['attaque_pokemon1']) ? 'class="error"' : ''; ?> /></div>
     </fieldset>
     <fieldset>
       <legend>Pokemon 2 :
         <select id="pokemon2" name="pokemon2" <?php echo isset($form_error['pokemon2']) ? 'class="error"' : ''; ?>>
+          <option value="">- Aucun -</option>
           <?php
             foreach($pokemons as $pokemon => $stats) {
-              echo '<option value="' . $pokemon . '" ' . ($pokemon == 'Bulbizarre' ? 'selected' : '') . '>' . $pokemon . '</option>';
+              echo '<option value="' . $pokemon . '" ' . (isset($nom_pokemon2) && $pokemon == $nom_pokemon2 ? 'selected' : '') . '>' . $pokemon . '</option>';
             }
           ?>
         </select>
       </legend>
-      <div>Points de vie : <input type="test" name="pv_pokemon2" value="<?php echo $bulbizarre['pv']; ?>" <?php echo isset($form_error['pv_pokemon2']) ? 'class="error"' : ''; ?> /></div>
-      <div>Points de défense : <input type="test" name="defense_pokemon2" value="<?php echo $bulbizarre['defense']; ?>" <?php echo isset($form_error['defense_pokemon2']) ? 'class="error"' : ''; ?> /></div>
-      <div>Points d'attaque : <input type="test" name="attaque_pokemon2" value="<?php echo $bulbizarre['attaque']; ?>" <?php echo isset($form_error['attaque_pokemon2']) ? 'class="error"' : ''; ?> /></div>
+      <div>Points de vie : <input type="test" name="pv_pokemon2" value="<?php echo isset($pokemon2) ? $pokemon2['pv'] : ''; ?>" <?php echo isset($form_error['pv_pokemon2']) ? 'class="error"' : ''; ?> /></div>
+      <div>Points de défense : <input type="test" name="defense_pokemon2" value="<?php echo isset($pokemon2) ? $pokemon2['defense'] : ''; ?>" <?php echo isset($form_error['defense_pokemon2']) ? 'class="error"' : ''; ?> /></div>
+      <div>Points d'attaque : <input type="test" name="attaque_pokemon2" value="<?php echo isset($pokemon2) ? $pokemon2['attaque'] : ''; ?>" <?php echo isset($form_error['attaque_pokemon2']) ? 'class="error"' : ''; ?> /></div>
     </fieldset>
     <button type="submit">Combattez !</button>
   </form>
