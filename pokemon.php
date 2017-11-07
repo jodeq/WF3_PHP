@@ -52,14 +52,19 @@ foreach($pokemons as $pokemon => $stats) {
 }
 echo '
 
-  function changePokemon(event) {
+  function changePokemon1(event) {
     selPokemon = $(this).val();
     $("[name=\'pv_pokemon1\']").val(pokemons[selPokemon]["pv"]);
   }
 
+  function changePokemon2(event) {
+    selPokemon = $(this).val();
+    $("[name=\'pv_pokemon2\']").val(pokemons[selPokemon]["pv"]);
+  }
+
   $(document).ready(function() {
-    $("#pokemon1").on("change", changePokemon);
-    $("#pokemon2").on("change", changePokemon);
+    $("#pokemon1").on("change", changePokemon1);
+    $("#pokemon2").on("change", changePokemon2);
   });
 
   </script>
