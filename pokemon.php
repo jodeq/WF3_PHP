@@ -11,29 +11,46 @@
 // Mes pokemons
 $pokemons = array();
 
+// Les pokemons ont 50 points à répartir entre vie, défense et attaque
 // Pikachu
 $pikachu = [
-  'pv' => isset($_GET['pv_pokemon1']) ? $_GET['pv_pokemon1'] : 25, // 25 Points de vie par défaut
-  'attaque' => isset($_GET['attaque_pokemon1']) ? $_GET['attaque_pokemon1'] : 15,
-  'defense' => isset($_GET['defense_pokemon1']) ? $_GET['defense_pokemon1'] : 10
+  'pv' => 25,
+  'attaque' => 15,
+  'defense' => 10
 ];
 $pokemons['Pikachu'] = $pikachu;
 
 // Bulbizarre
 $bulbizarre = [
-  'pv' => isset($_GET['pv_pokemon2']) ? $_GET['pv_pokemon2'] : 30,
-  'attaque' => isset($_GET['attaque_pokemon2']) ? $_GET['attaque_pokemon2'] : 8,
-  'defense' => isset($_GET['defense_pokemon2']) ? $_GET['defense_pokemon2'] : 20
+  'pv' => 30,
+  'attaque' => 8,
+  'defense' => 12
 ];
 $pokemons['Bulbizarre'] = $bulbizarre;
 
 // Salameche
 $salameche = [
-  'pv' => isset($_GET['pv_pokemon2']) ? $_GET['pv_pokemon2'] : 30,
-  'attaque' => isset($_GET['attaque_pokemon2']) ? $_GET['attaque_pokemon2'] : 8,
-  'defense' => isset($_GET['defense_pokemon2']) ? $_GET['defense_pokemon2'] : 20
+  'pv' => 15,
+  'attaque' => 20,
+  'defense' => 15
 ];
 $pokemons['Salameche'] = $salameche;
+
+
+
+echo '
+  <script type="text/javascript">
+    var pokemons = [];
+';
+foreach($pokemons as $pokemon => $stats) {
+  echo 'pokemons["' . $pokemon . '"] = [];' . "\n";
+  foreach ($stats as $cle => $valeur) {
+    echo 'pokemons["' . $pokemon . '"]["' . $cle . '"] = ' . $valeur . "\n";
+  }
+}
+echo '
+  </script>
+';
 
 // tableau de validation
 $form_error = [];
