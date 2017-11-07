@@ -2,17 +2,18 @@
 <html>
 <head>
   <!-- Insérer le css ici -->
-  <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
   <!-- Jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+  <img src="img/arene.jpg"/>
 
   <?php
-    require("pokemon.php");
+    require("inc/pokemon.php");
   ?>
 
-  <form>
+  <form method="post">
     <fieldset>
       <legend>Pokemon 1 :
         <select name="pokemon1" <?php echo isset($form_error['pokemon1']) ? 'class="error"' : ''; ?>>

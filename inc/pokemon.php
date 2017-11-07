@@ -40,7 +40,7 @@ $pokemons['Salameche'] = $salameche;
 $form_error = [];
 
 // Validation du formulaire
-foreach($_GET as $input => $value) {
+foreach($_POST as $input => $value) {
   if ($input === 'pokemon1' || $input === 'pokemon2') {
     if (!isset($pokemons[$value])) {
       echo '<p style="">Le pokemon ' . $value . ' n\'est pas un pokemon disponible</p>';
@@ -56,26 +56,26 @@ foreach($_GET as $input => $value) {
 if (count($form_error) > 0)
   die ("Le combat est reporté pour cause d'erreurs de saisie");
 
-if (count($_GET) == 0) {
+if (count($_POST) == 0) {
   echo "<h2>Veuillez sélectionner vos pokemons et lancez le combat</h2>";
   return;
 }
 
-$nom_pokemon1 = $_GET['pokemon1'];
+$nom_pokemon1 = $_POST['pokemon1'];
 $pokemon1 = $pokemons[$nom_pokemon1];
 
 // stats customs
-$pokemon1["pv"] = $_GET['pv_pokemon1'];
-$pokemon1["defense"] = $_GET['defense_pokemon1'];
-$pokemon1["attaque"] = $_GET['attaque_pokemon1'];
+$pokemon1["pv"] = $_POST['pv_pokemon1'];
+$pokemon1["defense"] = $_POST['defense_pokemon1'];
+$pokemon1["attaque"] = $_POST['attaque_pokemon1'];
 
-$nom_pokemon2 = $_GET['pokemon2'];
+$nom_pokemon2 = $_POST['pokemon2'];
 $pokemon2 = $pokemons[$nom_pokemon2];
 
 // stats customs
-$pokemon2["pv"] = $_GET['pv_pokemon2'];
-$pokemon2["defense"] = $_GET['defense_pokemon2'];
-$pokemon2["attaque"] = $_GET['attaque_pokemon2'];
+$pokemon2["pv"] = $_POST['pv_pokemon2'];
+$pokemon2["defense"] = $_POST['defense_pokemon2'];
+$pokemon2["attaque"] = $_POST['attaque_pokemon2'];
 
 echo "<h2>$nom_pokemon1 affronte $nom_pokemon2</h2>";
 

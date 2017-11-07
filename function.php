@@ -17,15 +17,21 @@ function attaque($nom_pokemon1, &$pokemon1, $nom_pokemon2, &$pokemon2) {
     // La défense est supérieure à l'attaque, pokemon1 prend la moitié du coup et la défense baisse un peu
     $coup = ($pokemon2['defense'] - $pokemon1['attaque']) / 2;
     $pokemon1['pv'] -= $coup;
+    if ($pokemon1['pv'] < 0)
+      $pokemon1['pv'] = 0;
     $pokemon2['defense'] -= 1;
     echo "<p>$nom_pokemon2 perd 1 Points de défense, il lui reste " . $pokemon2['defense'] . " Points de défense</p>";
     echo "<p>$nom_pokemon1 râte son attaque ! Il perd $coup Points de vie, il lui reste " . $pokemon1['pv'] . " Points de vie</p>";
   }
 
-  if ($pokemon2['pv'] <= 0) // S'il n'y a pas d'accolades après un if, seule la première instruction est filtrée par le if
+  if ($pokemon2['pv'] <= 0) {
     echo "<p>$nom_pokemon2 est KO !</p>";
-  if ($pokemon1['pv'] <= 0)
+    $pokemon2['pv'] = 0;
+  }
+  if ($pokemon1['pv'] <= 0) {
     echo "<p>$nom_pokemon1 est KO !</p>";
+    $pokemon1['pv'] = 0;
+  }
 }
 
 ?>
