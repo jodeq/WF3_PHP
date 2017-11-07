@@ -12,6 +12,8 @@ function attaque($nom_pokemon1, &$pokemon1, $nom_pokemon2, &$pokemon2) {
     // L'attaque est supérieure à la défense : pokemon1 touche
     $coup = $pokemon1['attaque'] - $pokemon2['defense'] + 1; // La valeur du coup est la différence entre l'attaque et la défense
     $pokemon2['pv'] -= $coup;
+    if ($pokemon2['pv'] < 0)
+      $pokemon2['pv'] = 0;
     echo "<p>$nom_pokemon2 perd $coup PV, il lui reste " . $pokemon2['pv'] . " PV</p>";
   } else {
     // La défense est supérieure à l'attaque, pokemon1 prend la moitié du coup et la défense baisse un peu
@@ -24,14 +26,10 @@ function attaque($nom_pokemon1, &$pokemon1, $nom_pokemon2, &$pokemon2) {
     echo "<p>$nom_pokemon1 râte son attaque ! Il perd $coup Points de vie, il lui reste " . $pokemon1['pv'] . " Points de vie</p>";
   }
 
-  if ($pokemon2['pv'] <= 0) {
+  if ($pokemon2['pv'] <= 0)
     echo "<p>$nom_pokemon2 est KO !</p>";
-    $pokemon2['pv'] = 0;
-  }
-  if ($pokemon1['pv'] <= 0) {
+  if ($pokemon1['pv'] <= 0)
     echo "<p>$nom_pokemon1 est KO !</p>";
-    $pokemon1['pv'] = 0;
-  }
 }
 
 ?>
