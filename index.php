@@ -3,7 +3,7 @@
 <head>
   <!-- Insérer le css ici -->
   <link rel="stylesheet" type="text/css" href="style.css">
-
+  <!-- Jquery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
@@ -43,6 +43,33 @@
     </fieldset>
     <button type="submit">Combattez !</button>
   </form>
+
+  <script type="text/javascript">
+    var pokemons = [];
+    <?php
+      foreach($pokemons as $pokemon => $stats) {
+        echo 'pokemons["' . $pokemon . '"] = [];' . "\n";
+        foreach ($stats as $cle => $valeur) {
+          echo 'pokemons["' . $pokemon . '"]["' . $cle . '"] = ' . $valeur . "\n";
+        }
+      }
+    ?>
+
+    function changePokemon(event) {
+      selPokemon = $(this).val();
+      // Récupération de la valeur name de l'élément courant
+      select = $(this).attr('name');
+      $("[name='pv_" + select + "']").val(pokemons[selPokemon]["pv"]);
+      $("[name='defense_" + select + "']").val(pokemons[selPokemon]["defense"]);
+      $("[name='attaque_" + select + "']").val(pokemons[selPokemon]["attaque"]);
+    }
+
+    $(document).ready(function() {
+      // Tous les select avec un attribut name qui commence par 'pokemon'
+      $("select[name^='pokemon']").on("change", changePokemon);
+    });
+
+  </script>
 
 </body>
 </html>

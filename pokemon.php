@@ -36,42 +36,6 @@ $salameche = [
 ];
 $pokemons['Salameche'] = $salameche;
 
-
-
-echo '
-  <script type="text/javascript">
-    var pokemons = [];
-';
-foreach($pokemons as $pokemon => $stats) {
-  echo 'pokemons["' . $pokemon . '"] = [];' . "\n";
-  foreach ($stats as $cle => $valeur) {
-    echo 'pokemons["' . $pokemon . '"]["' . $cle . '"] = ' . $valeur . "\n";
-  }
-}
-echo '
-
-  function changePokemon1(event) {
-    selPokemon = $(this).val();
-    $("[name=\'pv_pokemon1\']").val(pokemons[selPokemon]["pv"]);
-    $("[name=\'defense_pokemon1\']").val(pokemons[selPokemon]["defense"]);
-    $("[name=\'attaque_pokemon1\']").val(pokemons[selPokemon]["attaque"]);
-  }
-
-  function changePokemon2(event) {
-    selPokemon = $(this).val();
-    $("[name=\'pv_pokemon2\']").val(pokemons[selPokemon]["pv"]);
-    $("[name=\'defense_pokemon2\']").val(pokemons[selPokemon]["defense"]);
-    $("[name=\'attaque_pokemon2\']").val(pokemons[selPokemon]["attaque"]);
-  }
-
-  $(document).ready(function() {
-    $("#pokemon1").on("change", changePokemon1);
-    $("#pokemon2").on("change", changePokemon2);
-  });
-
-  </script>
-';
-
 // tableau de validation
 $form_error = [];
 
