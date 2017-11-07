@@ -121,10 +121,7 @@ echo "<h2>$nom_pokemon1 affronte $nom_pokemon2</h2>";
 
 //echo "Date : " . date('d/m/Y : H:i:s');
 
-// Boucle de combat
-do {
-  echo "<h2> Tour : " . ++$tour . " à " . date('H:i:s') . "</h2>";
-
+function attaque($nom_pokemon1, &$pokemon1, $nom_pokemon2, &$pokemon2) {
   // pokemon1 attaque pokemon2
   echo "<h3>$nom_pokemon1 attaque $nom_pokemon2</h3>";
   if ($pokemon1['attaque'] >= $pokemon2['defense']) {
@@ -145,28 +142,16 @@ do {
     echo "<p>$nom_pokemon2 est KO !</p>";
   if ($pokemon1['pv'] <= 0)
     echo "<p>$nom_pokemon1 est KO !</p>";
+}
 
-  // Et maintenant la contre-attaque : à vous de jouer !
-  // pokemon2 attaque pokemon1
-  echo "<h3>$nom_pokemon2 attaque $nom_pokemon1</h3>";
-  if ($pokemon2['attaque'] >= $pokemon1['defense']) {
-    // L'attaque est supérieure à la défense : pokemon2 touche
-    $coup = $pokemon2['attaque'] - $pokemon1['defense'] + 1; // La valeur du coup est la différence entre l'attaque et la défense
-    $pokemon1['pv'] -= $coup;
-    echo "<p>$nom_pokemon1 perd $coup PV, il lui reste " . $pokemon1['pv'] . " PV</p>";
-  } else {
-    // La défense est supérieure à l'attaque, pokemon2 prend la moitié du coup et la défense baisse un peu
-    $coup = ($pokemon1['defense'] - $pokemon2['attaque']) / 2;
-    $pokemon2['pv'] -= $coup;
-    $pokemon1['defense'] -= 1;
-    echo "<p>$nom_pokemon1 perd 1 Points de défense, il lui reste " . $pokemon1['defense'] . " Points de défense</p>";
-    echo "<p>$nom_pokemon2 râte son attaque ! Il perd $coup Points de vie, il lui reste " . $pokemon2['pv'] . " Points de vie</p>";
-  }
+// Boucle de combat
+do {
+  echo "<h2> Tour : " . ++$tour . " à " . date('H:i:s') . "</h2>";
 
-  if ($pokemon2['pv'] <= 0) // S'il n'y a pas d'accolades après un if, seule la première instruction est filtrée par le if
-    echo "<p>$nom_pokemon2 est KO !</p>";
-  if ($pokemon1['pv'] <= 0)
-    echo "<p>$nom_pokemon1 est KO !</p>";
+  // attaque
+  attaque($nom_pokemon1, $pokemon1, $nom_pokemon2, $pokemon2);
+  // contre attaque
+  attaque($nom_pokemon2, $pokemon2, $nom_pokemon1, $pokemon1);
 
 } while ($pokemon1['pv'] > 0 && $pokemon2['pv'] > 0); // === !($pikachu['pv'] <= 0 || $bulbizarre['pv'] <= 0)
 
