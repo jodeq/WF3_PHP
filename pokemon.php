@@ -150,6 +150,10 @@ do {
 
   // attaque
   attaque($nom_pokemon1, $pokemon1, $nom_pokemon2, $pokemon2);
+
+  if ($pokemon2['pv'] <= 0)
+    break;
+  
   // contre attaque
   attaque($nom_pokemon2, $pokemon2, $nom_pokemon1, $pokemon1);
 
