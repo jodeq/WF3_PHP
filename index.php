@@ -47,6 +47,7 @@
     <button type="submit">Combattez !</button>
   </form>
 
+  <script type="text/javascript" src="js/function.js"></script>
   <script type="text/javascript">
     var pokemons = [];
     <?php
@@ -57,15 +58,6 @@
         }
       }
     ?>
-
-    function changePokemon(event) {
-      selPokemon = $(this).val();
-      // Récupération de la valeur name de l'élément courant
-      select = $(this).attr('name');
-      $("[name='pv_" + select + "']").val(pokemons[selPokemon]["pv"]);
-      $("[name='defense_" + select + "']").val(pokemons[selPokemon]["defense"]);
-      $("[name='attaque_" + select + "']").val(pokemons[selPokemon]["attaque"]);
-    }
 
     $(document).ready(function() {
       // Tous les select avec un attribut name qui commence par 'pokemon'
