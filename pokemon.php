@@ -2,6 +2,8 @@
 <head>
   <!-- Insérer le css ici -->
   <link rel="stylesheet" type="text/css" href="style.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -49,6 +51,17 @@ foreach($pokemons as $pokemon => $stats) {
   }
 }
 echo '
+
+  function changePokemon(event) {
+    selPokemon = $(this).val();
+    $("[name=\'pv_pokemon1\']").val(pokemons[selPokemon]["pv"]);
+  }
+
+  $(document).ready(function() {
+    $("#pokemon1").on("change", changePokemon);
+    $("#pokemon2").on("change", changePokemon);
+  });
+
   </script>
 ';
 
@@ -73,7 +86,7 @@ foreach($_GET as $input => $value) {
   <form>
     <fieldset>
       <legend>Pokemon 1 :
-        <select name="pokemon1" <?php echo isset($form_error['pokemon1']) ? 'class="error"' : ''; ?>>
+        <select id="pokemon1" name="pokemon1" <?php echo isset($form_error['pokemon1']) ? 'class="error"' : ''; ?>>
           <?php
             foreach($pokemons as $pokemon => $stats) {
               echo '<option value="' . $pokemon . '">' . $pokemon . '</option>';
@@ -87,7 +100,7 @@ foreach($_GET as $input => $value) {
     </fieldset>
     <fieldset>
       <legend>Pokemon 2 :
-        <select name="pokemon2" <?php echo isset($form_error['pokemon2']) ? 'class="error"' : ''; ?>>
+        <select id="pokemon2" name="pokemon2" <?php echo isset($form_error['pokemon2']) ? 'class="error"' : ''; ?>>
           <?php
             foreach($pokemons as $pokemon => $stats) {
               echo '<option value="' . $pokemon . '" ' . ($pokemon == 'Bulbizarre' ? 'selected' : '') . '>' . $pokemon . '</option>';
