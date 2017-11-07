@@ -55,11 +55,15 @@ echo '
   function changePokemon1(event) {
     selPokemon = $(this).val();
     $("[name=\'pv_pokemon1\']").val(pokemons[selPokemon]["pv"]);
+    $("[name=\'defense_pokemon1\']").val(pokemons[selPokemon]["defense"]);
+    $("[name=\'attaque_pokemon1\']").val(pokemons[selPokemon]["attaque"]);
   }
 
   function changePokemon2(event) {
     selPokemon = $(this).val();
     $("[name=\'pv_pokemon2\']").val(pokemons[selPokemon]["pv"]);
+    $("[name=\'defense_pokemon2\']").val(pokemons[selPokemon]["defense"]);
+    $("[name=\'attaque_pokemon2\']").val(pokemons[selPokemon]["attaque"]);
   }
 
   $(document).ready(function() {
@@ -134,8 +138,30 @@ echo "</pre>";*/
 if (count($form_error) > 0)
   die ("Le combat est reporté pour cause d'erreurs de saisie");
 
+if (count($_GET) == 0) {
+  echo "<h2>Veuillez sélectionner vos pokemons et lancez le combat</h2>";
+  exit;
+}
 
 $tour = 0;
+
+$nom_pokemon1 = $_GET['pokemon1'];
+$pokemon1 = $pokemons[$nom_pokemon1];
+
+// stats customs
+$pokemon1["pv"] = $_GET['pv_pokemon1'];
+$pokemon1["defense"] = $_GET['defense_pokemon1'];
+$pokemon1["attaque"] = $_GET['attaque_pokemon1'];
+
+$nom_pokemon2 = $_GET['pokemon2'];
+$pokemon2 = $pokemons[$nom_pokemon2];
+
+// stats customs
+$pokemon2["pv"] = $_GET['pv_pokemon2'];
+$pokemon2["defense"] = $_GET['defense_pokemon2'];
+$pokemon2["attaque"] = $_GET['attaque_pokemon2'];
+
+echo "<h2>$nom_pokemon1 affronte $nom_pokemon2</h2>";
 
 //echo "Date : " . date('d/m/Y : H:i:s');
 
@@ -143,50 +169,50 @@ $tour = 0;
 do {
   echo "<h2> Tour : " . ++$tour . " à " . date('H:i:s') . "</h2>";
 
-  // pikachu attaque bulbizarre
-  echo "<h3>Pikachu attaque bulbizarre</h3>";
-  if ($pikachu['attaque'] >= $bulbizarre['defense']) {
-    // L'attaque est supérieure à la défense : pikachu touche
-    $coup = $pikachu['attaque'] - $bulbizarre['defense'] + 1; // La valeur du coup est la différence entre l'attaque et la défense
-    $bulbizarre['pv'] -= $coup;
-    echo "<p>Bulbizarre perd $coup PV, il lui reste " . $bulbizarre['pv'] . " PV</p>";
+  // pokemon1 attaque pokemon2
+  echo "<h3>$nom_pokemon1 attaque $nom_pokemon2</h3>";
+  if ($pokemon1['attaque'] >= $pokemon2['defense']) {
+    // L'attaque est supérieure à la défense : pokemon1 touche
+    $coup = $pokemon1['attaque'] - $pokemon2['defense'] + 1; // La valeur du coup est la différence entre l'attaque et la défense
+    $pokemon2['pv'] -= $coup;
+    echo "<p>$nom_pokemon2 perd $coup PV, il lui reste " . $pokemon2['pv'] . " PV</p>";
   } else {
-    // La défense est supérieure à l'attaque, pikachu prend la moitié du coup et la défense baisse un peu
-    $coup = ($bulbizarre['defense'] - $pikachu['attaque']) / 2;
-    $pikachu['pv'] -= $coup;
-    $bulbizarre['defense'] -= 1;
-    echo "<p>Bulbizarre perd 1 Points de défense, il lui reste " . $bulbizarre['defense'] . " Points de défense</p>";
-    echo "<p>Pikachu râte son attaque ! Il perd $coup Points de vie, il lui reste " . $pikachu['pv'] . " Points de vie</p>";
+    // La défense est supérieure à l'attaque, pokemon1 prend la moitié du coup et la défense baisse un peu
+    $coup = ($pokemon2['defense'] - $pokemon1['attaque']) / 2;
+    $pokemon1['pv'] -= $coup;
+    $pokemon2['defense'] -= 1;
+    echo "<p>$nom_pokemon2 perd 1 Points de défense, il lui reste " . $pokemon2['defense'] . " Points de défense</p>";
+    echo "<p>$nom_pokemon1 râte son attaque ! Il perd $coup Points de vie, il lui reste " . $pokemon1['pv'] . " Points de vie</p>";
   }
 
-  if ($bulbizarre['pv'] <= 0) // S'il n'y a pas d'accolades après un if, seule la première instruction est filtrée par le if
-    echo "<p>Bulbizarre est KO !</p>";
-  if ($pikachu['pv'] <= 0)
-    echo "<p>Pikachu est KO !</p>";
+  if ($pokemon2['pv'] <= 0) // S'il n'y a pas d'accolades après un if, seule la première instruction est filtrée par le if
+    echo "<p>$nom_pokemon2 est KO !</p>";
+  if ($pokemon1['pv'] <= 0)
+    echo "<p>$nom_pokemon1 est KO !</p>";
 
   // Et maintenant la contre-attaque : à vous de jouer !
-  // bulbizarre attaque pikachu
-  echo "<h3>Bulbizarre attaque Pikachu</h3>";
-  if ($bulbizarre['attaque'] >= $pikachu['defense']) {
-    // L'attaque est supérieure à la défense : bulbizarre touche
-    $coup = $bulbizarre['attaque'] - $pikachu['defense'] + 1; // La valeur du coup est la différence entre l'attaque et la défense
-    $pikachu['pv'] -= $coup;
-    echo "<p>Pikachu perd $coup PV, il lui reste " . $pikachu['pv'] . " PV</p>";
+  // pokemon2 attaque pokemon1
+  echo "<h3>$nom_pokemon2 attaque $nom_pokemon1</h3>";
+  if ($pokemon2['attaque'] >= $pokemon1['defense']) {
+    // L'attaque est supérieure à la défense : pokemon2 touche
+    $coup = $pokemon2['attaque'] - $pokemon1['defense'] + 1; // La valeur du coup est la différence entre l'attaque et la défense
+    $pokemon1['pv'] -= $coup;
+    echo "<p>$nom_pokemon1 perd $coup PV, il lui reste " . $pokemon1['pv'] . " PV</p>";
   } else {
-    // La défense est supérieure à l'attaque, bulbizarre prend la moitié du coup et la défense baisse un peu
-    $coup = ($pikachu['defense'] - $bulbizarre['attaque']) / 2;
-    $bulbizarre['pv'] -= $coup;
-    $pikachu['defense'] -= 1;
-    echo "<p>Pikachu perd 1 Points de défense, il lui reste " . $pikachu['defense'] . " Points de défense</p>";
-    echo "<p>Bulbizarre râte son attaque ! Il perd $coup Points de vie, il lui reste " . $bulbizarre['pv'] . " Points de vie</p>";
+    // La défense est supérieure à l'attaque, pokemon2 prend la moitié du coup et la défense baisse un peu
+    $coup = ($pokemon1['defense'] - $pokemon2['attaque']) / 2;
+    $pokemon2['pv'] -= $coup;
+    $pokemon1['defense'] -= 1;
+    echo "<p>$nom_pokemon1 perd 1 Points de défense, il lui reste " . $pokemon1['defense'] . " Points de défense</p>";
+    echo "<p>$nom_pokemon2 râte son attaque ! Il perd $coup Points de vie, il lui reste " . $pokemon2['pv'] . " Points de vie</p>";
   }
 
-  if ($bulbizarre['pv'] <= 0) // S'il n'y a pas d'accolades après un if, seule la première instruction est filtrée par le if
-    echo "<p>Bulbizarre est KO !</p>";
-  if ($pikachu['pv'] <= 0)
-    echo "<p>Pikachu est KO !</p>";
+  if ($pokemon2['pv'] <= 0) // S'il n'y a pas d'accolades après un if, seule la première instruction est filtrée par le if
+    echo "<p>$nom_pokemon2 est KO !</p>";
+  if ($pokemon1['pv'] <= 0)
+    echo "<p>$nom_pokemon1 est KO !</p>";
 
-} while ($pikachu['pv'] > 0 && $bulbizarre['pv'] > 0); // === !($pikachu['pv'] <= 0 || $bulbizarre['pv'] <= 0)
+} while ($pokemon1['pv'] > 0 && $pokemon2['pv'] > 0); // === !($pikachu['pv'] <= 0 || $bulbizarre['pv'] <= 0)
 
 
 
