@@ -27,7 +27,7 @@
   define('DB', 'pokemon'); // Base de données sur laquelle on va faire les requêtes
 
   $db_options = array(
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,// On affiche des warnings pour les erreurs, à commenter en prod (valeur par défaut PDO::ERRMODE_SILENT)
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,// On affiche des warnings pour les erreurs, à commenter en prod (valeur par défaut PDO::ERRMODE_SILENT)
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC   // Mode ASSOC par défaut pour les fetch
   );
 
@@ -52,7 +52,17 @@
       // ici nous ferons l'insertion
       $query = $db->prepare("INSERT INTO pokedex(nom_proprietaire) VALUES (:nom_proprietaire)");
       $query->bindParam(':nom_proprietaire', $nom_proprietaire, PDO::PARAM_STR);
-      $query->execute();
+      // exécution de la requête préparée
+      try {
+        $query->execute();
+      } catch(PDOException $e) {
+        // Il y a eu une erreur
+        if ($e->getCode() == "23000")
+          $form_errors['nom_proprietaire'] = "Le nom $nom_proprietaire existe déjà !";
+        else {
+          $form_errors['nom_proprietaire'] = "Erreur lors de l'insertion en base : " . $e->getMessage();
+        }
+      }
     }
   }
 
