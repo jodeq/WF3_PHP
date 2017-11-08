@@ -44,14 +44,15 @@
 
     // Validation
     // Le nom ne doit pas être vide et faire au maximum 50 caractères
-    //'' ou null
-    if (empty($nom_proprietaire)) { // $nom_proprietaire != null && $nom_proprietaire != ''
+    if (empty($nom_proprietaire)) {
       $form_errors['nom_proprietaire'] = "Le nom doit être renseigné";
     } elseif (strlen($nom_proprietaire) > 50) {
       $form_errors['nom_proprietaire'] = "Le nom doit faire 50 caractères maximum";
     } else {
       // ici nous ferons l'insertion
-      echo "Insertion à faire";
+      $query = $db->prepare("INSERT INTO pokedex(nom_proprietaire) VALUES (:nom_proprietaire)");
+      $query->bindParam(':nom_proprietaire', $nom_proprietaire, PDO::PARAM_STR);
+      $query->execute();
     }
   }
 
@@ -59,29 +60,40 @@
   if (!$query = $db->query('SELECT * FROM pokedex')) {
     $errors[] = "Erreur lors de la création de la requête";
   }
-  if(!$result = $query->fetch()) {
-    $errors[] = "Aucune ligne trouvée";
+
+  $table = "";
+
+  while ($result = $query->fetch()) {
+    // Première ligne : affichage des titres de colonnes
+    if ($table == "") {
+      $table = "
+  <table style='border-collapse: collapse;'>
+    <thead>
+      <tr>
+        <th style='border: solid;'>
+        " . implode('</th><th style="border: solid;">', array_keys($result)) . "
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      ";
+    }
+    // Ajout d'une ligne dans la table
+    $table .= "
+      <tr>
+        <td style='border: solid;'>
+        " . implode('</td><td style="border: solid;">', $result) . "
+        </td>
+      </tr>
+    ";
   }
 
-  if (count($errors) == 0) {
-    // Affichage d'un tableau PHP en tableau html
-    $table = "
-      <table style='border-collapse: collapse;'>
-        <thead>
-          <tr>
-            <th style='border: solid;'>
-            " . implode('</th><th style="border: solid;">', array_keys($result)) . "
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style='border: solid;'>
-            " . implode('</td><td style="border: solid;">', $result) . "
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  if($table == "") {
+    $errors[] = "Aucune ligne trouvée";
+  } else {
+    $table .= "
+    </tbody>
+  </table>
     ";
   }
 ?>
