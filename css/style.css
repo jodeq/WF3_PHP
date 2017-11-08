@@ -3,3 +3,11 @@
   border-color : red;
   background-color: red;
 }
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}

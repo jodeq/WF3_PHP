@@ -6,6 +6,10 @@
   <title>Formulaire d'insertion en base de donnée</title>
 
   <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" />
+
+  <!-- Jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
@@ -36,6 +40,12 @@
     $db = new PDO($dsn, USER, PASS, $db_options);
   } catch (PDOException $e) {
     $errors[] = "Erreur de connexion : " . $e->getMessage();
+  }
+
+  if (formIsSubmit('deletePokedex')) {
+    var_dump($_POST);
+    $id_delete = $_POST['id_delete'];
+    echo "suppression de $id_delete !";
   }
 
   if (formIsSubmit('insertPokedex')) {
@@ -77,11 +87,13 @@
     // Première ligne : affichage des titres de colonnes
     if ($table == "") {
       $table = "
-  <table style='border-collapse: collapse;'>
+  <table>
     <thead>
       <tr>
-        <th style='border: solid;'>
-        " . implode('</th><th style="border: solid;">', array_keys($result)) . "
+        <th>
+        </th>
+        <th>
+        " . implode('</th><th>', array_keys($result)) . "
         </th>
       </tr>
     </thead>
@@ -91,8 +103,11 @@
     // Ajout d'une ligne dans la table
     $table .= "
       <tr>
-        <td style='border: solid;'>
-        " . implode('</td><td style="border: solid;">', $result) . "
+        <td>
+          <a onclick=\"formSubmit('deletePokedex', 'id_delete', '" . $result['id'] . "');\"><i class=\"fa fa-trash-o fa-fw\" aria-hidden=\"true\"></i></a>
+        </td>
+        <td>
+        " . implode('</td><td>', $result) . "
         </td>
       </tr>
     ";
@@ -118,6 +133,10 @@
     <button type="submit">Ajouter</button>
   </form>
 
+  <form method="post" id="deletePokedex">
+    <input type="hidden" name="deletePokedex" value="1"/>
+    <input type="hidden" id="id_delete" name="id_delete" value=""/>
+  </form>
 
 <?php
   if (count($errors) > 0)
@@ -126,6 +145,6 @@
     echo "$table";
 ?>
 
-  <!--script src="js/scripts.js"></script-->
+  <script src="../js/function.js"></script>
 </body>
 </html>
