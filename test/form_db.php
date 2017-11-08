@@ -18,6 +18,7 @@
   require_once('../inc/function.php');
 
   $errors = [];
+  $form_errors = [];
 
   // Configuration de la base de données à placer dans un fichier différent pour la production
   define('HOST', 'localhost'); // Domaine ou IP du serveur ou est située la base de données
@@ -39,10 +40,19 @@
 
   if (formIsSubmit('insertPokedex')) {
     // code d'insertion
-    echo "<p>Nouvel enregistrement</p>";
     $nom_proprietaire = $_POST['nom_proprietaire'];
 
     // Validation
+    // Le nom ne doit pas être vide et faire au maximum 50 caractères
+    //'' ou null
+    if (empty($nom_proprietaire)) { // $nom_proprietaire != null && $nom_proprietaire != ''
+      $form_errors['nom_proprietaire'] = "Le nom doit être renseigné";
+    } elseif (strlen($nom_proprietaire) > 50) {
+      $form_errors['nom_proprietaire'] = "Le nom doit faire 50 caractères maximum";
+    } else {
+      // ici nous ferons l'insertion
+      echo "Insertion à faire";
+    }
   }
 
   // Lister les pokedex enregistrés
@@ -80,8 +90,9 @@
     <input type="hidden" name="insertPokedex" value="1"/>
 
     <label for="nom_proprietaire">Nom du proprietaire : </label>
-    <input id="nom_proprietaire" name="nom_proprietaire" type="text"/>
-
+    <input id="nom_proprietaire" name="nom_proprietaire" type="text" <?php echo isset($form_errors['nom_proprietaire']) ? 'class="error"' : '' ?> />
+    <?php echo isset($form_errors['nom_proprietaire']) ? $form_errors['nom_proprietaire'] : ''?>
+    <br>
     <button type="submit">Ajouter</button>
   </form>
 
