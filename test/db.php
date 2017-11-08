@@ -9,9 +9,9 @@ define('PASS', ''); // Mot de passe de connexion à la base
 define('DB', 'pokemon'); // Base de données sur laquelle on va faire les requêtes
 
 $db_options = array(
-  PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING // On affiche des warnings pour les erreurs, à commenter en prod (valeur par défaut PDO::ERRMODE_SILENT)
+  PDO::ATTR_ERRMODE => PDO::ERRMODE_WARNING,// On affiche des warnings pour les erreurs, à commenter en prod (valeur par défaut PDO::ERRMODE_SILENT)
+  PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC   // Mode ASSOC par défaut pour les fetch
 );
-
 
 
 echo "<pre>";
