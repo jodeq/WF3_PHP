@@ -1,5 +1,12 @@
 <?php
 
+/*
+ * formIsSubmit : test si un fomulaire a été soumis
+ */
+function formIsSubmit($form_name) {
+  return (isset($_POST[$form_name]) ? $_POST[$form_name] : '0') === '1';
+}
+
 function attaque($nom_pokemon1, &$pokemon1, $nom_pokemon2, &$pokemon2) {
   // $tour est initialisée à 0 et conservera sa dernière modification à chaque appel de la fonction grâçe au mot clé static
   static $tour = 0;
