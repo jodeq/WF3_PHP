@@ -42,6 +42,28 @@
       $errors[] = "Erreur de connexion : " . $e->getMessage();
     }
 
+    if (formIsSubmit('deletePokemon')) {
+      $id_delete = intval($_POST['id_delete']);
+
+      $query = $db->prepare("DELETE FROM pokemon WHERE id = :id;");
+      $query->bindParam(':id', $id_delete, PDO::PARAM_INT);
+
+      // exécution de la requête préparée
+      try {
+        $query->execute();
+      } catch(PDOException $e) {
+        // Il y a eu une erreur
+        /*if ($e->getCode() == "23000")
+          $form_errors['nom_proprietaire'] = "Le nom $nom_proprietaire existe déjà !";
+        else {
+          $form_errors['nom_proprietaire'] = "Erreur lors de l'insertion en base : " . $e->getMessage();
+        }*/
+        var_dump($e);
+      }
+
+      showMessage($query->rowCount() . ' lignes supprimées !');
+    }
+
     if (formIsSubmit('insertPokemon')) {
       // code d'insertion
       $numero_pokemon = $_POST['numero_pokemon'];
@@ -50,7 +72,7 @@
       $vie_pokemon = $_POST['vie_pokemon'];
       $defense_pokemon = $_POST['defense_pokemon'];
       $attaque_pokemon = $_POST['attaque_pokemon'];
-      //$pokedex_pokemon = $_POST['pokedex_pokemon'];
+      $pokedex_pokemon = $_POST['pokedex_pokemon'];
 
       // Validation
       if (!filter_var($numero_pokemon, FILTER_VALIDATE_INT, array("options" => array("min_range" => 1)))) {
@@ -79,6 +101,10 @@
         $form_errors['attaque_pokemon'] = "L'attaque doit être un nombre strictement supérieur à 0";
       }
 
+      if (!filter_var($pokedex_pokemon, FILTER_VALIDATE_INT, array("options" => array("min_range" => 0)))) {
+        $form_errors['attaque_pokemon'] = "La valeur du pokedex n'est pas valide";
+      }
+
       /*if (empty($defense_pokemon)) {
         $form_errors['defense_pokemon'] = "La défence doit être renseignée";
       } elseif (!is_int($defense_pokemon)) {
@@ -90,8 +116,8 @@
       // S'il n'y a pas eu d'erreur ET que la connexion existe
       if (count($form_errors) == 0 && isset($db)) {
         $query = $db->prepare("
-          INSERT INTO pokemon(numero,  nom,  experience,  vie,  defense,  attaque)
-            VALUES           (:numero, :nom, :experience, :vie, :defense, :attaque)
+          INSERT INTO pokemon(numero,  nom,  experience,  vie,  defense,  attaque,  id_pokedex)
+            VALUES           (:numero, :nom, :experience, :vie, :defense, :attaque, :id_pokedex)
         ");
         $query->bindParam(':numero', $numero_pokemon, PDO::PARAM_INT);
         $query->bindParam(':nom', $nom_pokemon, PDO::PARAM_STR);
@@ -99,6 +125,7 @@
         $query->bindParam(':vie', $vie_pokemon, PDO::PARAM_INT);
         $query->bindParam(':defense', $defense_pokemon, PDO::PARAM_INT);
         $query->bindParam(':attaque', $attaque_pokemon, PDO::PARAM_INT);
+        $query->bindParam(':id_pokedex', $pokedex_pokemon, PDO::PARAM_INT);
 
         // exécution de la requête préparée
         try {
@@ -115,6 +142,19 @@
       }
     }
 
+    // Liste des pokedex
+    $pokedexs = [];
+    $pokedex_options = "";
+    if (!$query = $db->query('SELECT id, nom_proprietaire FROM pokedex')) {
+      $errors[] = "Erreur lors de la création de la requête";
+    } else {
+      $pokedexs = $query->fetchAll();
+
+      foreach($pokedexs as $pokedex) {
+        $pokedex_options .= '<option value="' . $pokedex['id'] . '">' . $pokedex['nom_proprietaire'] . '</option>';
+      }
+    }
+
     // Affichage des pokemons
     if (!$query = $db->query('SELECT * FROM pokemon')) {
       $errors[] = "Erreur lors de la création de la requête";
@@ -126,7 +166,8 @@
       // Première ligne : affichage des titres de colonnes
       if ($table == "") {
         $table = "
-    <table class=\"table\">
+    <table class=\"table table-hover table-responsive-sm\">
+      <caption>Liste de tous les pokemons existants</caption>
       <thead>
         <tr>
           <th scope=\"col\">
@@ -143,7 +184,7 @@
       $table .= "
         <tr>
           <td scope=\"row\">
-            <a onclick=\"formSubmit('deletePokedex', 'id_delete', '" . $result['id'] . "');\"><i class=\"fa fa-trash-o fa-fw\" aria-hidden=\"true\"></i></a>
+            <a onclick=\"formSubmit('deletePokemon', 'id_delete', '" . $result['id'] . "');\"><i class=\"fa fa-trash-o fa-fw\" aria-hidden=\"true\"></i></a>
           </td>
           <td>
           " . implode('</td><td>', $result) . "
@@ -173,54 +214,57 @@
       <div class="col-xs-12 col-sm-8">
         <form method="post" id="insertPokemon">
           <input type="hidden" name="insertPokemon" value="1"/>
-          <div class="form-control form-control-lg">
+          <div class="form-control">
             <div>
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label" for="numero_pokemon">Numéro Pokemon</label>
-                <div class="col-sm-8">
+                <label class="col-sm-2 col-form-label" for="numero_pokemon">Numéro</label>
+                <div class="col-sm-10">
                   <input type="text" class="form-control <?php echo isset($form_errors['numero_pokemon']) ? 'is-invalid' : '' ?>" id="numero_pokemon" name="numero_pokemon" value="<?php echo isset($_POST['numero_pokemon']) ? $_POST['numero_pokemon'] : '' ?>">
                   <?php echo isset($form_errors['numero_pokemon']) ? '<div class="invalid-feedback">' . $form_errors['numero_pokemon'] . '</div>' : '' ?>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label" for="nom_pokemon">Nom Pokemon :</label>
-                <div class="col-sm-8">
+                <label class="col-sm-2 col-form-label" for="nom_pokemon">Nom</label>
+                <div class="col-sm-10">
                   <input type="text" class="form-control <?php echo isset($form_errors['nom_pokemon']) ? 'is-invalid' : '' ?>" id="nom_pokemon" name="nom_pokemon" value="<?php echo isset($_POST['nom_pokemon']) ? $_POST['nom_pokemon'] : '' ?>">
                   <?php echo isset($form_errors['nom_pokemon']) ? '<div class="invalid-feedback">' . $form_errors['nom_pokemon'] . '</div>' : '' ?>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label" for="experience_pokemon">XP Pokemon :</label>
-                <div class="col-sm-8">
+                <label class="col-sm-2 col-form-label" for="experience_pokemon">Expérience</label>
+                <div class="col-sm-10">
                   <input type="text" class="form-control <?php echo isset($form_errors['experience_pokemon']) ? 'is-invalid' : '' ?>" id="experience_pokemon" name="experience_pokemon" value="<?php echo isset($_POST['experience_pokemon']) ? $_POST['experience_pokemon'] : '' ?>">
                   <?php echo isset($form_errors['experience_pokemon']) ? '<div class="invalid-feedback">' . $form_errors['experience_pokemon'] . '</div>' : '' ?>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label" for="vie_pokemon">PV Pokemon :</label>
-                <div class="col-sm-8">
+                <label class="col-sm-2 col-form-label" for="vie_pokemon">Vie</label>
+                <div class="col-sm-10">
                   <input type="text" class="form-control <?php echo isset($form_errors['vie_pokemon']) ? 'is-invalid' : '' ?>" id="vie_pokemon" name="vie_pokemon" value="<?php echo isset($_POST['vie_pokemon']) ? $_POST['vie_pokemon'] : '' ?>">
                   <?php echo isset($form_errors['vie_pokemon']) ? '<div class="invalid-feedback">' . $form_errors['vie_pokemon'] . '</div>' : '' ?>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label" for="defense_pokemon">DEF Pokemon :</label>
-                <div class="col-sm-8">
+                <label class="col-sm-2 col-form-label" for="defense_pokemon">Défense</label>
+                <div class="col-sm-10">
                   <input type="text" class="form-control <?php echo isset($form_errors['defense_pokemon']) ? 'is-invalid' : '' ?>" id="defense_pokemon" name="defense_pokemon" value="<?php echo isset($_POST['defense_pokemon']) ? $_POST['defense_pokemon'] : '' ?>">
                   <?php echo isset($form_errors['defense_pokemon']) ? '<div class="invalid-feedback">' . $form_errors['defense_pokemon'] . '</div>' : '' ?>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label" for="attaque_pokemon">ATK Pokemon :</label>
-                <div class="col-sm-8">
+                <label class="col-sm-2 col-form-label" for="attaque_pokemon">Attaque</label>
+                <div class="col-sm-10">
                   <input type="text" class="form-control <?php echo isset($form_errors['attaque_pokemon']) ? 'is-invalid' : '' ?>" id="attaque_pokemon" name="attaque_pokemon" value="<?php echo isset($_POST['attaque_pokemon']) ? $_POST['attaque_pokemon'] : '' ?>">
                   <?php echo isset($form_errors['attaque_pokemon']) ? '<div class="invalid-feedback">' . $form_errors['attaque_pokemon'] . '</div>' : '' ?>
                 </div>
               </div>
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label" for="pokedex_pokemon">N.Pokedex :</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control <?php echo isset($form_errors['pokedex_pokemon']) ? 'is-invalid' : '' ?>" id="pokedex_pokemon" name="pokedex_pokemon" value="<?php echo isset($_POST['pokedex_pokemon']) ? $_POST['pokedex_pokemon'] : '' ?>">
+                <label class="col-sm-2 col-form-label" for="pokedex_pokemon">Propriétaire</label>
+                <div class="col-sm-10">
+                  <select class="form-control <?php echo isset($form_errors['pokedex_pokemon']) ? 'is-invalid' : '' ?>" id="pokedex_pokemon" name="pokedex_pokemon" value="<?php echo isset($_POST['pokedex_pokemon']) ? $_POST['pokedex_pokemon'] : '' ?>">
+                    <option value="">- Aucun -</option>
+                    <?php echo $pokedex_options; ?>
+                  </select>
                   <?php echo isset($form_errors['pokedex_pokemon']) ? '<div class="invalid-feedback">' . $form_errors['pokedex_pokemon'] . '</div>' : '' ?>
                 </div>
               </div>
@@ -243,6 +287,13 @@
       ?>
     </div>
   </div> <!-- Container -->
+
+  <form method="post" id="deletePokemon">
+    <input type="hidden" name="deletePokemon" value="1"/>
+    <input type="hidden" id="id_delete" name="id_delete" value=""/>
+  </form>
+
+  <script src="../js/function.js"></script>
 </body>
 
 </html>

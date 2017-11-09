@@ -11,6 +11,18 @@ function getVal($value, $default = '') {
   return isset($value) ? $value : $default;
 }
 
+function showMessage($message, $type = 'alert-success') {
+  $html = "
+  <div class=\"alert $type alert-dismissible fade show\" role=\"alert\">
+    <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+      <span aria-hidden=\"true\">&times;</span>
+    </button>
+    " . htmlspecialchars($message) . "
+  </div>
+  ";
+  echo $html;
+}
+
 function attaque($nom_pokemon1, &$pokemon1, $nom_pokemon2, &$pokemon2) {
   // $tour est initialisée à 0 et conservera sa dernière modification à chaque appel de la fonction grâçe au mot clé static
   static $tour = 0;
