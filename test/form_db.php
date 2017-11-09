@@ -21,7 +21,10 @@
 <?php
   require_once('../inc/function.php');
 
+  // Liste des erreurs fonctionnelles (base de données, technique)
   $errors = [];
+
+  // Liste des erreurs liées aux formulaires (mauvaises données, ...)
   $form_errors = [];
 
   // Configuration de la base de données à placer dans un fichier différent pour la production
@@ -127,8 +130,10 @@
     <input type="hidden" name="insertPokedex" value="1"/>
 
     <label for="nom_proprietaire">Nom du proprietaire : </label>
-    <input id="nom_proprietaire" name="nom_proprietaire" type="text" <?php echo isset($form_errors['nom_proprietaire']) ? 'class="error"' : '' ?> />
-    <?php echo isset($form_errors['nom_proprietaire']) ? $form_errors['nom_proprietaire'] : ''?>
+    <input id="nom_proprietaire" name="nom_proprietaire" type="text" value="<?php echo (isset($_POST['nom_proprietaire']) ? $_POST['nom_proprietaire'] : ''); ?> "<?php echo isset($form_errors['nom_proprietaire']) ? 'class="error"' : '' ?> />
+    <?php  //          SI                           ?     ALORS                        : SINON
+      echo (isset($form_errors['nom_proprietaire']) ? $form_errors['nom_proprietaire'] : '');
+    ?>
     <br>
     <button type="submit">Ajouter</button>
   </form>
