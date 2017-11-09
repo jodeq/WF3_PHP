@@ -236,8 +236,8 @@ La connexion à la base de données avec PDO s'effectue en déclarant une nouvel
 **DSN** Le DSN (Data Source Name) est une chaîne de caractère composée de :
  * Type de base de données
  * Chemin d'accès à cette base de données :
-  * host qui désigne le domaine sur lequel la base de données est hébergée (localhost sur un serveur local type XAMPP)
-  * db_name qui désigne le nom de la base de données à laquelle on souhaite se connecter.
+   + host qui désigne le domaine sur lequel la base de données est hébergée (localhost sur un serveur local type XAMPP)
+   + db_name qui désigne le nom de la base de données à laquelle on souhaite se connecter.
 
 **Identifiants de connexion** Les identifiants de connexion sont définis dans la configuration de MySQL et composés d'un nom d'utilisateur et d'un mot de passe. L'utilisateur désigné doit disposer des droits d'accès en lecture et/ou écriture pour pouvoir effectuer des opérations sur la base de données.
 
