@@ -178,49 +178,49 @@
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label" for="numero_pokemon">Numéro Pokemon</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control <?php echo isset($form_errors['numero_pokemon']) ? 'is-invalid' : '' ?>" id="numero_pokemon" name="numero_pokemon" value="<?php echo getVal($_POST['numero_pokemon']) ?>">
+                  <input type="text" class="form-control <?php echo isset($form_errors['numero_pokemon']) ? 'is-invalid' : '' ?>" id="numero_pokemon" name="numero_pokemon" value="<?php echo isset($_POST['numero_pokemon']) ? $_POST['numero_pokemon'] : '' ?>">
                   <?php echo isset($form_errors['numero_pokemon']) ? '<div class="invalid-feedback">' . $form_errors['numero_pokemon'] . '</div>' : '' ?>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label" for="nom_pokemon">Nom Pokemon :</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control <?php echo isset($form_errors['nom_pokemon']) ? 'is-invalid' : '' ?>" id="nom_pokemon" name="nom_pokemon" value="<?php echo getVal($_POST['nom_pokemon']) ?>">
+                  <input type="text" class="form-control <?php echo isset($form_errors['nom_pokemon']) ? 'is-invalid' : '' ?>" id="nom_pokemon" name="nom_pokemon" value="<?php echo isset($_POST['nom_pokemon']) ? $_POST['nom_pokemon'] : '' ?>">
                   <?php echo isset($form_errors['nom_pokemon']) ? '<div class="invalid-feedback">' . $form_errors['nom_pokemon'] . '</div>' : '' ?>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label" for="experience_pokemon">XP Pokemon :</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control <?php echo isset($form_errors['experience_pokemon']) ? 'is-invalid' : '' ?>" id="experience_pokemon" name="experience_pokemon" value="<?php echo getVal($_POST['experience_pokemon']) ?>">
+                  <input type="text" class="form-control <?php echo isset($form_errors['experience_pokemon']) ? 'is-invalid' : '' ?>" id="experience_pokemon" name="experience_pokemon" value="<?php echo isset($_POST['experience_pokemon']) ? $_POST['experience_pokemon'] : '' ?>">
                   <?php echo isset($form_errors['experience_pokemon']) ? '<div class="invalid-feedback">' . $form_errors['experience_pokemon'] . '</div>' : '' ?>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label" for="vie_pokemon">PV Pokemon :</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control <?php echo isset($form_errors['vie_pokemon']) ? 'is-invalid' : '' ?>" id="vie_pokemon" name="vie_pokemon" value="<?php echo getVal($_POST['vie_pokemon']) ?>">
+                  <input type="text" class="form-control <?php echo isset($form_errors['vie_pokemon']) ? 'is-invalid' : '' ?>" id="vie_pokemon" name="vie_pokemon" value="<?php echo isset($_POST['vie_pokemon']) ? $_POST['vie_pokemon'] : '' ?>">
                   <?php echo isset($form_errors['vie_pokemon']) ? '<div class="invalid-feedback">' . $form_errors['vie_pokemon'] . '</div>' : '' ?>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label" for="defense_pokemon">DEF Pokemon :</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control <?php echo isset($form_errors['defense_pokemon']) ? 'is-invalid' : '' ?>" id="defense_pokemon" name="defense_pokemon" value="<?php echo getVal($_POST['defense_pokemon']) ?>">
+                  <input type="text" class="form-control <?php echo isset($form_errors['defense_pokemon']) ? 'is-invalid' : '' ?>" id="defense_pokemon" name="defense_pokemon" value="<?php echo isset($_POST['defense_pokemon']) ? $_POST['defense_pokemon'] : '' ?>">
                   <?php echo isset($form_errors['defense_pokemon']) ? '<div class="invalid-feedback">' . $form_errors['defense_pokemon'] . '</div>' : '' ?>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label" for="attaque_pokemon">ATK Pokemon :</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control <?php echo isset($form_errors['attaque_pokemon']) ? 'is-invalid' : '' ?>" id="attaque_pokemon" name="attaque_pokemon" value="<?php echo getVal($_POST['attaque_pokemon']) ?>">
+                  <input type="text" class="form-control <?php echo isset($form_errors['attaque_pokemon']) ? 'is-invalid' : '' ?>" id="attaque_pokemon" name="attaque_pokemon" value="<?php echo isset($_POST['attaque_pokemon']) ? $_POST['attaque_pokemon'] : '' ?>">
                   <?php echo isset($form_errors['attaque_pokemon']) ? '<div class="invalid-feedback">' . $form_errors['attaque_pokemon'] . '</div>' : '' ?>
                 </div>
               </div>
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label" for="pokedex_pokemon">N.Pokedex :</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control <?php echo isset($form_errors['pokedex_pokemon']) ? 'is-invalid' : '' ?>" id="pokedex_pokemon" name="pokedex_pokemon" value="<?php echo getVal($_POST['pokedex_pokemon']) ?>">
+                  <input type="text" class="form-control <?php echo isset($form_errors['pokedex_pokemon']) ? 'is-invalid' : '' ?>" id="pokedex_pokemon" name="pokedex_pokemon" value="<?php echo isset($_POST['pokedex_pokemon']) ? $_POST['pokedex_pokemon'] : '' ?>">
                   <?php echo isset($form_errors['pokedex_pokemon']) ? '<div class="invalid-feedback">' . $form_errors['pokedex_pokemon'] . '</div>' : '' ?>
                 </div>
               </div>
