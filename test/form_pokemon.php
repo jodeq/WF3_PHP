@@ -105,14 +105,6 @@
         $form_errors['attaque_pokemon'] = "La valeur du pokedex n'est pas valide";
       }
 
-      /*if (empty($defense_pokemon)) {
-        $form_errors['defense_pokemon'] = "La défence doit être renseignée";
-      } elseif (!is_int($defense_pokemon)) {
-        $form_errors['defense_pokemon'] = "La défense doit être un nombre";
-      } elseif ($defense_pokemon <= 0) {
-        $form_errors['defense_pokemon'] = "La défense doit être strictement supérieure à 0";
-      }*/
-
       // S'il n'y a pas eu d'erreur ET que la connexion existe
       if (count($form_errors) == 0 && isset($db)) {
         $query = $db->prepare("
@@ -132,11 +124,6 @@
           $query->execute();
         } catch(PDOException $e) {
           // Il y a eu une erreur
-          /*if ($e->getCode() == "23000")
-            $form_errors['nom_proprietaire'] = "Le nom $nom_proprietaire existe déjà !";
-          else {
-            $form_errors['nom_proprietaire'] = "Erreur lors de l'insertion en base : " . $e->getMessage();
-          }*/
           var_dump($e);
         }
       }
@@ -156,7 +143,11 @@
     }
 
     // Affichage des pokemons
-    if (!$query = $db->query('SELECT * FROM pokemon')) {
+    if (!$query = $db->query('
+    SELECT pokemon.id, numero, nom, experience, vie, defense, attaque, nom_proprietaire
+      FROM pokemon
+        LEFT JOIN pokedex ON (id_pokedex = pokedex.id)
+    ')) {
       $errors[] = "Erreur lors de la création de la requête";
     }
 
