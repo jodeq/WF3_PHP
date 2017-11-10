@@ -40,15 +40,15 @@ $image = "../img/pokeball.png";
   <div class="row align-items-center">
     <div class="col-sm-4 d-none d-sm-block">
       <img class="img-fluid mx-auto" src="<?php echo $image; ?>" alt="" />
-    </div> <!-- Col -->
+    </div> <!-- col -->
     <div class="col-xs-12 col-sm-8">
-      <form method="post" id="insertPokemon">
-        <input type="hidden" name="insertPokemon" value="1"/>
+      <form method="post" id="updatePokemon" enctype="multipart/form-data">
+        <input type="hidden" name="updatePokemon" value="1"/>
         <div class="form-control">
           <div>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label" for="numero">Numéro</label>
-              <div class="col-sm-10">
+              <label class="col-sm-3 col-form-label" for="numero">Numéro</label>
+              <div class="col-sm-9">
                 <input
                   type="text"
                   class="form-control <?php echo isset($form_errors['numero']) ? 'is-invalid' : '' ?>"
@@ -61,8 +61,8 @@ $image = "../img/pokeball.png";
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label" for="nom">Nom</label>
-              <div class="col-sm-10">
+              <label class="col-sm-3 col-form-label" for="nom">Nom</label>
+              <div class="col-sm-9">
                 <input
                   type="text"
                   class="form-control <?php echo isset($form_errors['nom']) ? 'is-invalid' : '' ?>"
@@ -75,8 +75,8 @@ $image = "../img/pokeball.png";
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label" for="experience">Expérience</label>
-              <div class="col-sm-10">
+              <label class="col-sm-3 col-form-label" for="experience">Expérience</label>
+              <div class="col-sm-9">
                 <input
                   type="text"
                   class="form-control <?php echo isset($form_errors['experience']) ? 'is-invalid' : '' ?>"
@@ -89,8 +89,8 @@ $image = "../img/pokeball.png";
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label" for="vie">Vie</label>
-              <div class="col-sm-10">
+              <label class="col-sm-3 col-form-label" for="vie">Vie</label>
+              <div class="col-sm-9">
                 <input
                   type="text"
                   class="form-control <?php echo isset($form_errors['vie']) ? 'is-invalid' : '' ?>"
@@ -103,8 +103,8 @@ $image = "../img/pokeball.png";
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label" for="defense">Défense</label>
-              <div class="col-sm-10">
+              <label class="col-sm-3 col-form-label" for="defense">Défense</label>
+              <div class="col-sm-9">
                 <input
                   type="text"
                   class="form-control <?php echo isset($form_errors['defense']) ? 'is-invalid' : '' ?>"
@@ -117,8 +117,8 @@ $image = "../img/pokeball.png";
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label" for="attaque">Attaque</label>
-              <div class="col-sm-10">
+              <label class="col-sm-3 col-form-label" for="attaque">Attaque</label>
+              <div class="col-sm-9">
                 <input
                   type="text"
                   class="form-control <?php echo isset($form_errors['attaque']) ? 'is-invalid' : '' ?>"
@@ -131,8 +131,8 @@ $image = "../img/pokeball.png";
               </div>
             </div>
             <div class="form-group row">
-              <label class="col-sm-2 col-form-label" for="pokedex">Propriétaire</label>
-              <div class="col-sm-10">
+              <label class="col-sm-3 col-form-label" for="pokedex">Propriétaire</label>
+              <div class="col-sm-9">
                 <?php if ($mode_edit) : ?>
                 <select
                   class="form-control <?php echo isset($form_errors['pokedex']) ? 'is-invalid' : '' ?>"
@@ -157,6 +157,13 @@ $image = "../img/pokeball.png";
                 <?php endif; ?>
               </div>
             </div>
+            <?php if ($mode_edit) : ?>
+            <div class="form-group row">
+              <label class="col-sm-3 col-form-label" for="image">Nouvelle image</label>
+              <div class="col-sm-9">
+              <input type="file" id="image" name="image" accept="image/*"/>
+            </div>
+            <?php endif; ?>
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary">Valider</button>
