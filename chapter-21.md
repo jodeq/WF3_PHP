@@ -1,6 +1,6 @@
 # PHP et Mysql avec PDO
 
-## Les Injecions SQL
+## Les Injections SQL
 
 Une injection SQL consiste à profiter d'une faille dans les paramètres transmis à une requête SQL, pour lui faire exécuter un code SQL malicieux.
 

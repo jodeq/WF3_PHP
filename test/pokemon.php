@@ -69,7 +69,7 @@ if (formIsSubmit('updatePokemon')) {
     $form_errors['attaque'] = "L'attaque doit être un nombre strictement supérieur à 0";
   }
 
-  if (!filter_var($pokedex, FILTER_VALIDATE_INT, array("options" => array("min_range" => 0)))) {
+  if (!filter_var($pokedex, FILTER_VALIDATE_INT, array("options" => array("min_range" => 1)))) {
     $form_errors['pokedex'] = "La valeur du pokedex n'est pas valide";
   }
 
