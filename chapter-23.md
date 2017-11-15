@@ -82,11 +82,11 @@ Les clauses `LIMIT` et `OFFSET` fonctionnent sur n'importe quelle requête `SELE
 
 Il est possible de préciser un offset de départ :
 
-`LIMIT 40 OFFSET 10` signifie qu'on ne va renvoyer que les résultats 41 à 61. `OFFSET 10` : on commence à partir du 11ème enregistrement.
+`LIMIT 40 OFFSET 20` signifie qu'on ne va renvoyer que les résultats 41 à 60. `OFFSET 20` : on commence à partir du 41ème enregistrement.
 
 Il est alors possible d'utiliser ce mécanisme afin de créer un système de pagination.
 
-Si on souhaite des pages de 20 éléments, la page 1 correspondra à `LIMIT 20` (enregistrements 1 à 20), la page 2 à `LIMIT 20 OFFSET 20` (enregistrements 21 à 41), la page 3 à `LIMIT 20 OFFSET 40` (enregistrements 41 à 61), etc.
+Si on souhaite des pages de 20 éléments, la page 1 correspondra à `LIMIT 20` (enregistrements 1 à 20), la page 2 à `LIMIT 20 OFFSET 20` (enregistrements 21 à 40), la page 3 à `LIMIT 20 OFFSET 40` (enregistrements 41 à 60), etc.
 
 ### Système de pagination
 
