@@ -83,7 +83,7 @@ GET /v1/factures
     }
 ]
 ```
-Pour lister les factures dans un <ul> on pourrait alors écrire le script suivant:
+Pour lister les factures dans un `<ul>` on pourrait alors écrire le script suivant:
 ```
 <?php
 // Création d'un flux
