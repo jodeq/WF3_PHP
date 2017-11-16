@@ -39,7 +39,7 @@ Prenons par exemple une API pour gérer des factures.
 Vous aurez alors les urls suivantes, dont les actions vont être différentes selon le verbe HTTP utilisé.
 
 |Verbe HTTP|Collection: /v1/factures|Instance: /v1/factures/5618|Code HTTP
-|----
+|----|----|----|----|
 |`GET`|Liste toutes les factures|Récupère le détail de la facture 5618|200 OK|
 |`POST`|Créé une nouvelle facture|-|201 Created|
 |`PUT`|-|Mise à jour de la totalité de la facture|200 OK|
