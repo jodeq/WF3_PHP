@@ -58,3 +58,22 @@ En cliquant sur le lien `plus d'info` affichez toutes les informations du dresse
 * arene_prefere
 
 Cette page plus d'info doit être dynamique et si le dresseur demandé n'existe pas affiché `Aucun dresseur trouvé`.
+
+
+## 3. Achat inapp : conversion
+
+Dans le cadre de notre application pokemon, les dresseurs peuvent acheter des pokedollars ![one pokedollars](http://strategicalblog.com/wp-content/uploads/2012/11/pokedollar-strategicalblog.png)
+> credit : http://strategicalblog.com
+
+Le taux de conversion Euro/Pokedollar est de 1€ = 1.23P<br>
+Le taux de conversion Dollar/pokedollar est de 1$ = 1.05P
+
+Dans un fichier PHP créez une fonction permattant de convertir des euros vos devises en pokedollars
+
+Les paramètres de cette fonction doivent être :
+* le montant à convertir
+* la devise du montant (USD ou EUR)
+
+Votre fonction affichera : `[montant] [devise] = [montant converti] pokedollars`
+
+avec montant le premier paramètre, devise le second paramètre et montant converti le résulat de la conversion.
