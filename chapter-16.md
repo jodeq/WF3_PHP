@@ -122,7 +122,7 @@ Exemple d'un formulaire de contact :
         <option value="Monsieur">Monsieur</option>
     </select>
     <input type="text" name="pseudo" />
-    <input type="textarea" name="contenu" />
+    <textarea name="contenu"></textarea>
     <input type="text" name="email" />
     <input type="submit"/> // Bouton pour envoyer le formulaire
 </form>
