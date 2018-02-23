@@ -108,7 +108,7 @@ Réservé aux requêtes `SELECT`, permet de restreindre la sélection en précis
 Exemple :
 ```
 SELECT * FROM movies ORDER BY RAND() LIMIT 3; // Remonte 3 films aléatoires
-SELECT * FROM movies LIMIT 50, 10; // Remonte 50 films à partir de la ligne 50
+SELECT * FROM movies LIMIT 50, 10; // Remonte 50 films à partir de la ligne 10
 ```
 
 **INSERT INTO**
