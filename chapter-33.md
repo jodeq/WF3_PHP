@@ -148,7 +148,7 @@ Autre exemple :
 ```
 SELECT name, price
 FROM Products
-WHERE Products.id > (
+WHERE Products.price > (
      SELECT AVG(price)
      FROM Products
 );
