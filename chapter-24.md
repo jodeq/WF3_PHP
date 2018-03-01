@@ -143,7 +143,7 @@ Soit la table `Products` :
 |  1 | Zenron    | 45.50 | 102   | Quincaillerie |
 |  2 | Y-lax     | 10.00 | 417   | Quincaillerie |
 |  3 | Insailtax | 18.90 | NULL  | Jardinerie    |
-|  4 | Physeco   | 10.00 | 612   | Quincaillerie |
+|  4 | Physeco   | 10.00 | 417   | Quincaillerie |
 |  5 | Zone Plus | 12.90 | 191   | Jardinerie    |
 +----+-----------+-------+-------+---------------+
 ```
@@ -155,7 +155,7 @@ SELECT COUNT(*) FROM products; -> retournera 5.
 ```
 Notez l'usage de l'astérisque dans la fonction `COUNT()`. Il permet de cibler l'ensemble des colonnes. MySQL renverra le nombre d'enregistrements différents en fonction de la valeur passée à `COUNT()`.
 
-La requête `SELECT COUNT(DISTINCT stock) FROM products;` -> retournera `4`, étant donné qu'on a un stock à `NULL` (pour les besoins de l'exemple)
+La requête `SELECT COUNT(DISTINCT stock) FROM products;` -> retournera `4`, étant donné qu'on a 4 valeurs distinctes (y compris `NULL`) dans la colonne stock.
 
 Le mot-clé `GROUP BY` permet de rassembler les enregistrement selon une colonne. On l'utilise avec une fonction d'agrégation.
 
