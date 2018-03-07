@@ -111,8 +111,10 @@ La table `dresseur_pokemon` contiendra les champs suivants :
 Exportez les déclaration des 2 tables dans un fichier SQL.
 
 Maintenant dans la page de détail d'un dresseur pokemon afficher la liste de ses pokemons
+
 Puis dans un formulaire :
 * Listez les pokemons non capturés
 * Ajoutez un bouton `Capturer` qui associera le pokemon choisi à ce dresseur
+
 S'il n'y a plus de pokemon libre, n'affichez pas ce formulaire.
 
