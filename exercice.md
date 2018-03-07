@@ -68,7 +68,7 @@ Dans le cadre de notre application pokemon, les dresseurs peuvent acheter des po
 Le taux de conversion Euro/Pokedollar est de 1€ = 1.23P<br>
 Le taux de conversion Dollar/pokedollar est de 1$ = 1.05P
 
-Dans un fichier PHP créez une fonction permattant de convertir des euros vos devises en pokedollars
+Dans un fichier PHP créez une fonction permettant de convertir vos devises (euro ou dollar) en pokedollars
 
 Les paramètres de cette fonction doivent être :
 * le montant à convertir
@@ -77,3 +77,35 @@ Les paramètres de cette fonction doivent être :
 Votre fonction affichera : `[montant] [devise] = [montant converti] pokedollars`
 
 avec montant le premier paramètre, devise le second paramètre et montant converti le résulat de la conversion.
+
+
+### 4. La chasse au pokemon
+
+Créez une table `pokemons` qui contiendra les champs suivants :
+* id (int + auto increment + primary key)
+* nom (varchar)
+* type (enum) (liste des valeurs : 'plante', 'feu', 'électrique', 'eau', 'normal')
+* pv (int) : points de vie
+* defense (int)
+* attaque (int)
+
+Ensuite vous pourrez passer le script SQL suivant pour ajouter des pokemons
+```
+INSERT INTO pokemons(nom, type, pv, defense, attaque) VALUES 
+('bulbizarre', 'plante', 45, 49, 49),
+('salamèche', 'feu', 39, 52, 43),
+('pikachu', 'électrique', 35, 55, 40),
+('rattata', 'normal', 30, 56, 35),
+('carapuce', 'eau', 44, 48, 65);
+```
+
+Créez ensuite la table d'association N-N qui permettra de savoir quel dresseur possède quel pokemon (ou inversement)
+
+La table `dresseur_pokemon` contiendra les champs suivants :
+
+* id_dresseur (int) : clé étrangère sur le champ `id` de la table `dresseurs`
+* id_pokemon (int) : clé étrangère sur le champ `id` de la table `pokemons`
+* date_capture (date)
+* la clé primaire sera le couple (id_dresseur, id_pokemon)
+
+Exportez les déclaration des 2 tables dans un fichier SQL.
