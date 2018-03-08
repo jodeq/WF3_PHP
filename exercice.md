@@ -118,3 +118,11 @@ Puis dans un formulaire :
 
 S'il n'y a plus de pokemon libre, n'affichez pas ce formulaire.
 
+
+## Et si on libérait nos pokemons ?
+
+Dans la liste des pokemons associés à un dresseur :
+* ajoutez une case à cocher devant chaque pokemon `<input type="checkbox" name="delete[]" value="' . $pokemon['id'] . '"/>`
+* ajouter un bouton `Relacher`
+
+Lorsque l'on clique sur relacher vous pourrez récupérer la liste des pokemon sélectionnés dans `$_POST['delete']`
