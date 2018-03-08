@@ -161,7 +161,7 @@ Cette dernière requête sélectionne les produits ayant un prix supérieur à l
 
 Les expressions régulières permettent de vérifier qu'une chaine de caractères répond à certaines règles.
 
-Les expressions régulières peuvent être vues comme des "masques" qui qu'on essaie d'appliquer sur les chaines.
+Les expressions régulières peuvent être vues comme des "masques" qu'on essaie d'appliquer sur les chaines.
 
 ### Fonctions PHP pour les expressions régulières PCRE
 
