@@ -6,7 +6,7 @@ Les tableaux multidimensionnels sont des tableaux ayant comme valeurs un ou plus
 
 Exemple d'utilisation simple d'un tableau multidimensionnel :
 
-Nous voulons créer un tableau multidimensionnel pour stocker la matrice (tableau à 2 dimensions) d'un jeu de morpion. Nous aurons donc besoin d'un tableau de tailles 3x3.
+Nous voulons créer un tableau multidimensionnel pour stocker la matrice (tableau à 2 dimensions) d'un jeu de morpion. Nous aurons donc besoin d'un tableau de taille 3x3.
 ```
 $tableauMultidimensionnel = array();
 $tableauMultidimensionnel[0] = array('X','O','X');
@@ -196,7 +196,7 @@ echo $message;
 $num      = 5;
 $location = 'bananier';
 $message  = 'Il y a %d singes dans le %s.';
-echo sprintf($format, $num, $location); // Affiche 'Il y a 5 singes dans le bananier'.
+echo sprintf($message, $num, $location); // Affiche 'Il y a 5 singes dans le bananier'.
 ```
 strlen - Retourne la longueur d'une chaîne de caractères.
 
@@ -318,4 +318,4 @@ if (false == filter_var($url, FILTER_VALIDATE_URL)) {
     exit("L'url de votre site n'est pas valide");
 }
 ```
-Pour en savoir sur la fonction filter_var, consultez cet [article](http://php.net/manual/fr/function.filter-var.php) ou [celui-ci](http://php.net/manual/fr/filter.filters.sanitize.php).
+Pour en savoir plus sur la fonction filter_var, consultez cet [article](http://php.net/manual/fr/function.filter-var.php) ou [celui-ci](http://php.net/manual/fr/filter.filters.sanitize.php).
